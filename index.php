@@ -1,6 +1,6 @@
 <?php
 require('model.php');
 
-$req = getPosts();
+$posts = getPosts();
 
 require('indexView.php');
