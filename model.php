@@ -7,7 +7,7 @@ function getPosts()
     return $req;
 }
 
-function getPost()
+function getPost($postId)
 {
     $db = dbConnect();
     $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
@@ -26,11 +26,13 @@ function getComments($postId)
     return $comments;
 }
 
+// Nouvelle fonction qui nous permet d'éviter de répéter du code
 function dbConnect()
 {
     try
     {
         $db = new PDO('mysql:host=localhost;dbname=tests;charset=utf8', 'root', 'root');
+        return $db;
     }
     catch(Exception $e)
     {
