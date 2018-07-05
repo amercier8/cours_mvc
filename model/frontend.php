@@ -26,7 +26,7 @@ function getComments($postId)
     return $comments;
 }
 
-// Nouvelle fonction qui nous permet d'éviter de répéter du code
+// Connection to the dataBase function, in order not to re-write it for every other function
 function dbConnect()
 {
     try
@@ -38,4 +38,15 @@ function dbConnect()
     {
         die('Erreur : '.$e->getMessage());
     }
+}
+
+// Add a comment in database
+
+function postComment($postId, $author, $comment)
+{
+    $db = dbConnect();
+    $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES (?, ?, ?, NOW ())');
+    $affectedLines = $comments->execute(array($postId, $author, $comment));
+
+    return $affectedLines;
 }
