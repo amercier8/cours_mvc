@@ -29,19 +29,12 @@ function getComments($postId)
 // Connection to the dataBase function, in order not to re-write it for every other function
 function dbConnect()
 {
-    try
-    {
-        $db = new PDO('mysql:host=localhost;dbname=tests;charset=utf8', 'root', 'root');
-        return $db;
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
+    // Q : Why don't we need to throw an exception here?
+    $db = new PDO('mysql:host=localhost;dbname=tests;charset=utf8', 'root', 'root');
+    return $db;
 }
 
 // Add a comment in database
-
 function postComment($postId, $author, $comment)
 {
     $db = dbConnect();

@@ -23,7 +23,8 @@ function addComment($postId, $author, $comment)
 
     if ($affectedLines === false)
     {
-        die('Impossible d\'ajouter le commentaire');
+        // This error has to be available in index.php. To Be Checked
+        throw new Exception('Impossible d\'ajouter le commentaire');
     }
     else
     {
