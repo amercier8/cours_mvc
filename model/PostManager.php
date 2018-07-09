@@ -1,5 +1,5 @@
 <?php
-class PostManager
+class PostManager extends Manager
 {
     public function getPosts()
     {
@@ -17,13 +17,6 @@ class PostManager
         $post = $req->fetch();
     
         return $post;
-    }
-
-    private function dbConnect()
-    {
-        // Q : Why don't we need to throw an exception here?
-        $db = new PDO('mysql:host=localhost;dbname=tests;charset=utf8', 'root', 'root');
-        return $db;
     }
 }
 
