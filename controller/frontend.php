@@ -36,3 +36,10 @@ function addComment($postId, $author, $comment)
         header('Location: index.php?action=post&id=' . $postId);
     }
 }
+
+function displayComment($commentId)
+{
+    // Trouble shooting missing
+    //with this function, we redirect to commentView.php and transmit the commentId
+    header('Location : commentView.php?action=displayComment&commentId=' . $commentId);
+}

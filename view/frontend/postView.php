@@ -37,6 +37,8 @@ while ($comment = $comments->fetch())
 ?>
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+    //I add a link to redirect to commentView.php (displaying a comment alone), before modifying it eventually
+    <p><a href="commentView.php?action=displayComment&amp;id=<?= $data['id'] ?>">Editer le commentaire</a></p>
 <?php
 }
 ?>
