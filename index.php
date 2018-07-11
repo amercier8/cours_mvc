@@ -27,7 +27,13 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }
-    }
+        elseif ($_GET['action'] == 'displayComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                getComment($_GET['id']);
+                echo 'yo';
+            }
+        }
+    }  
     else {
         listPosts();
     }
