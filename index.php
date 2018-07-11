@@ -29,8 +29,14 @@ try {
         }
         elseif ($_GET['action'] == 'displayComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                getComment($_GET['id']);
-                echo 'yo';
+                displayComment($_GET['id']);
+            }
+        }
+        elseif ($_GET['action'] == 'modifyComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                //TODO : Vérifier les données du formulaire
+
+                //TODO : Si form OK, appeler controleur, sinon retour à la page de modif des coms (=displayComment)
             }
         }
     }  

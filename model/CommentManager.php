@@ -28,9 +28,10 @@ class CommentManager extends Manager
     public function getComment($commentId)
     {
         $db = $this->dbConnect();
-        $comment = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE comment_id = ? ORDER BY comment_date DESC');
-        $comment->execute($commentId);
+        $req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC');
+        $req->execute(array($commentId));
+        $toto = $req->fetch();
 
-        return $comment;
+        return $toto;
     }
 }

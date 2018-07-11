@@ -39,7 +39,10 @@ function addComment($postId, $author, $comment)
 
 function displayComment($commentId)
 {
+    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+
+    $comment = $commentManager->getComment($commentId);
     // Trouble shooting missing
     //with this function, we redirect to commentView.php and transmit the commentId
-    header('Location : commentView.php?action=displayComment&commentId=' . $commentId);
+    require('view/frontend/commentView.php');
 }
