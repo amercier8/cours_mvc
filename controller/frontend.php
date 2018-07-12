@@ -51,7 +51,7 @@ function modifyComment($commentId, $commentAuthor, $commentContent)
 {
     $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
 
-    /*$comment = */$commentManager->modifyComment($commentId, $commentAuthor, $commentContent);
+    $commentManager->modifyComment($commentId, $commentAuthor, $commentContent);
 
-    header('Location: index.php');
+    header('Location: index.php?action=post&id=1' .$tata['post_id']);
 }

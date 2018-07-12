@@ -35,12 +35,18 @@ class CommentManager extends Manager
         return $toto;
     }
 
-    //modify a comment
+    //modify a comment & return its post_id
     public function modifyComment($commentId, $commentAuthor, $commentContent)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE comments SET author=? ,comment=? WHERE id=?');
         $req->execute(array($commentAuthor, $commentContent, $commentId));
 
+
+        $getCommentInfos = $db->prepare('SELECT post_id FROM comments WHERE id = ?');
+        $getCommentInfos->execute(array($commentId));
+        $tata = $getCommentInfos->fetch();
+
+        return $tata;
     }
 }
