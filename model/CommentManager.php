@@ -34,4 +34,13 @@ class CommentManager extends Manager
 
         return $toto;
     }
+
+    //modify a comment
+    public function modifyComment($commentId, $commentAuthor, $commentContent)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET author=? ,comment=? WHERE id=?');
+        $req->execute(array($commentAuthor, $commentContent, $commentId));
+
+    }
 }

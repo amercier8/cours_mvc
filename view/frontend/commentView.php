@@ -13,7 +13,7 @@
         <textarea id="comment" name="comment" ><?php echo $comment['comment'] ?></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input type="submit" value="Modifier le commentaire"/>
     </div>
 </form>
 <?php $content = ob_get_clean(); ?>

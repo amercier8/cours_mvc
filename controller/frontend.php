@@ -46,3 +46,12 @@ function displayComment($commentId)
     //with this function, we redirect to commentView.php and transmit the commentId
     require('view/frontend/commentView.php');
 }
+
+function modifyComment($commentId, $commentAuthor, $commentContent)
+{
+    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+
+    /*$comment = */$commentManager->modifyComment($commentId, $commentAuthor, $commentContent);
+
+    header('Location: index.php');
+}

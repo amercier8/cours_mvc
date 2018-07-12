@@ -34,9 +34,13 @@ try {
         }
         elseif ($_GET['action'] == 'modifyComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                //TODO : Vérifier les données du formulaire
-
-                //TODO : Si form OK, appeler controleur, sinon retour à la page de modif des coms (=displayComment)
+                //TODO : Je ne vérifie que si elles ne sont pas vides
+                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                    modifyComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                }
+                else {
+                    header('Location: index.php?action=displayComment&id=' .$_GET['id']);
+                }
             }
         }
     }  
