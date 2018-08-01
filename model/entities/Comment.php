@@ -1,7 +1,7 @@
 <?php
 class Comment {
     private $postId;
-    private $id, $author, $comment, $commenDate;
+    private $id, $author, $comment, $commentDate;
 
     //Function hydrate to add
     public function hydrate (array $donnees) {
@@ -25,6 +25,10 @@ class Comment {
     //
     //Manque les contrôles sur les données
     //
+    public function setId($id) {
+        $this->id = $id;
+    }
+
     public function setPostId($postId) {
         $this->postId = $postId;
     }
@@ -43,7 +47,7 @@ class Comment {
 
 
     //Getters
-    public function getPostID() {
+    public function getPostId() {
         return $this->postId;
     }
 

@@ -6,7 +6,9 @@ require_once('model/CommentManager.php');
 
 function listPosts()
 {
-    $postManager = new \OpenClassrooms\Blog\Model\PostManager();
+    //$postManager = new \OpenClassrooms\Blog\Model\PostManager();
+    $postManager = new PostManager();
+
     $posts = $postManager->getPosts();
 
     require('view/frontend/listPostsView.php');
@@ -14,8 +16,10 @@ function listPosts()
 
 function post()
 {
-    $postManager = new \OpenClassrooms\Blog\Model\PostManager();
-    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    //$postManager = new \OpenClassrooms\Blog\Model\PostManager();
+    $postManager = new PostManager();
+    //$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    $commentManager = new CommentManager();
 
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
@@ -25,7 +29,8 @@ function post()
 
 function addComment($postId, $author, $comment)
 {
-    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    //$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    $commentManager = new CommentManager();
 
     $affectedLines = $commentManager->postComment($postId, $author, $comment);
 
@@ -39,7 +44,8 @@ function addComment($postId, $author, $comment)
 
 function displayComment($commentId)
 {
-    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    //$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    $commentManager = new CommentManager();
 
     $comment = $commentManager->getComment($commentId);
     // Trouble shooting missing
@@ -49,7 +55,8 @@ function displayComment($commentId)
 
 function modifyComment($commentId, $commentAuthor, $commentContent)
 {
-    $commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    //$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    $commentManager = new CommentManager();
 
     $commentManager->modifyComment($commentId, $commentAuthor, $commentContent);
 

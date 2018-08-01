@@ -1,7 +1,7 @@
 <?php
 
 //Revoir le concept de namespace en profondeur
-namespace OpenClassrooms\Blog\Model;
+//namespace OpenClassrooms\Blog\Model;
 
 require_once("model/Manager.php");
 require_once("model/entities/Comment.php");
@@ -14,18 +14,15 @@ class CommentManager extends Manager
         //Connexion to the DB
         $db = $this->dbConnect();
         //$sql contains the sql request
-        $sql = 'SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
         //Usage of the execute request method, contained in the Manager
-        $results = $this->executeRequest($sql);
-        //Creation of an empty array
+        $results = $this->executeRequest($sql, array($postId));
+        //Creation of an empty array which is filled with the db data
         $comments = array();
         foreach ($results as $result) {
             $comment = new Comment($result);
             array_push($comments, $comment);
         }
-
-        var_dump($comments);
-        var_dump($results);
 
         //FIN DES TESTS
         /*

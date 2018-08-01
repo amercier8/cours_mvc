@@ -1,6 +1,6 @@
 <?php
 
-namespace OpenClassrooms\Blog\Model;
+//namespace OpenClassrooms\Blog\Model;
 
 class Manager
 {
@@ -28,13 +28,13 @@ class Manager
     return $result;
     }
 
+    
     private function getBdd() {
         if ($this->bdd == null) {
         // Création de la connexion
             $this->bdd = new PDO('mysql:host=localhost;dbname=tests;charset=utf8',
             'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
-    var_dump($this->bdd);
     return $this->bdd;
     }
 }

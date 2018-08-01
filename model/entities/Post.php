@@ -1,6 +1,6 @@
 <?php
 class Post {
-    private $postId, $nickname, $password, $mail, $registration_date;
+    private $id, $title, $content, $creation_date;
 
     //Hydrate
     public function hydrate (array $data) {
@@ -22,43 +22,37 @@ class Post {
 
     //Setters
     //Data controls missing, TO DO
-    public function setPostId($postId) {
-        $this->postId = $postId;
+    public function setId($id) {
+        $this->id = $id;
     }
 
-    public function setNickname($nicknme) {
-        $this->nickname = $nickname;
-    }
-    public function setPassword($password) {
-        $this->password = $password;
+    public function setTitle($title) {
+        $this->title = $title;
     }
 
-    public function setMail($mail) {
-        $this->mail = $mail;
+    public function setContent($content) {
+        $this->content = $content;
     }
 
-    public function setRegistration_date($registration_date) {
-        $this->registration_date = $registration_date;
+    public function setCreation_date($creation_date) {
+        $this->creation_date = $creation_date;
     }
+
 
     //Getters
-    public function getPostId() {
-        return $this->postId;
+    public function getId() {
+        return $this->id;
     }
 
-    public function getNickname() {
-        return $this->nickname;
+    public function getTitle() {
+        return $this->title;
     }
 
-    public function getpassword() {
-        return $this->password;
+    public function getContent() {
+        return $this->content;
     }
 
-    public function getMail() {
-        return $this->mail;
-    }
-
-    public function getRegistration_date() {
-        return $this->registration_date;
+    public function getCreation_date() {
+        return $this->creation_date;
     }
 }
