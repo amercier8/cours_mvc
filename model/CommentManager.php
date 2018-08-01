@@ -10,9 +10,29 @@ class CommentManager extends Manager
 {
     public function getComments($postId)
     {
+        //TESTS
+        //Connexion to the DB
+        $db = $this->dbConnect();
+        //$sql contains the sql request
+        $sql = 'SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
+        //Usage of the execute request method, contained in the Manager
+        $results = $this->executeRequest($sql);
+        //Creation of an empty array
+        $comments = array();
+        foreach ($results as $result) {
+            $comment = new Comment($result);
+            array_push($comments, $comment);
+        }
+
+        var_dump($comments);
+        var_dump($results);
+
+        //FIN DES TESTS
+        /*
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
         $comments->execute(array($postId));
+        */
 
         return $comments;
     }
