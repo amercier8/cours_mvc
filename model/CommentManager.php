@@ -29,8 +29,6 @@ class CommentManager extends Manager
 
     public function postComment($postId, $author, $comment)
     {
-
-        //TESTS BEGINNING
         //Creation of an array containing the method parameters
         $commentContent = ['postId' => $postId, 'author' => $author, 'comment' => $comment];
         //Creation of a new Comment object
@@ -43,27 +41,40 @@ class CommentManager extends Manager
     //Get a specific comment to display
     public function getComment($commentId)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC');
-        $req->execute(array($commentId));
-        
-        $toto = $req->fetch();
 
-        return $toto;
+        //TESTS
+        //TO BE REMOVED?
+        $db = $this->dbConnect();
+        $sql = 'SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC';
+        $results = $this->executeRequest($sql, array($commentId));
+        if ($results->rowCount() == 1) {
+            return new Comment($results->fetch());
+        }
+        else {
+            throw new Exception ('Aucun commentaire ne correspond');
+        }
+
+        return $comment;
+
     }
 
     //modify a comment & return its post_id
     public function modifyComment($commentId, $commentAuthor, $commentContent)
     {
+
+        //TESTS
+        //Update the comment itself
+        $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent];
+        $comment = new Comment($commentArray);
+
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET author=? ,comment=? WHERE id=?');
-        $req->execute(array($commentAuthor, $commentContent, $commentId));
+        $sqlUpdate = 'UPDATE comments SET author=? ,comment=? WHERE id=?';
+        $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getId()));
 
+        $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
+        $result = $this->executeRequest($sqlSelect, array($comment->getId()));
 
-        $getCommentInfos = $db->prepare('SELECT post_id FROM comments WHERE id = ?');
-        $getCommentInfos->execute(array($commentId));
-        $tata = $getCommentInfos->fetch();
+        return $result;
 
-        return $tata;
     }
 }
