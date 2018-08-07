@@ -29,11 +29,15 @@ class CommentManager extends Manager
 
     public function postComment($postId, $author, $comment)
     {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($postId, $author, $comment));
 
-        return $affectedLines;
+        //TESTS BEGINNING
+        //Creation of an array containing the method parameters
+        $commentContent = ['postId' => $postId, 'author' => $author, 'comment' => $comment];
+        //Creation of a new Comment object
+        $comment = new Comment($commentContent);
+        $sql = 'INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())';
+        //Adding the content of the object newly created to the DB
+        $comment = $this->executeRequest($sql, array($comment->getPostId(), $comment->getAuthor(), $comment->getComment() ));
     }
     
     //Get a specific comment to display
