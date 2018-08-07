@@ -10,7 +10,7 @@ class CommentManager extends Manager
 {
     public function getComments($postId)
     {
-        //TESTS
+        //OOP VERSION OF THE METHOD
         //Connexion to the DB
         $db = $this->dbConnect();
         //$sql contains the sql request
@@ -23,13 +23,6 @@ class CommentManager extends Manager
             $comment = new Comment($result);
             array_push($comments, $comment);
         }
-
-        //FIN DES TESTS
-        /*
-        $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
-        $comments->execute(array($postId));
-        */
 
         return $comments;
     }

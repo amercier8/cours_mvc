@@ -8,6 +8,7 @@
     <h3>
         <?= htmlspecialchars($post->getTitle()); ?>
         <em>le <?= $post->getCreation_date(); ?></em>
+        <p><?php var_dump($post); ?></p>
     </h3>
     
     <p>

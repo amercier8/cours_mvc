@@ -26,7 +26,7 @@ class PostManager extends Manager
     {
         
         $db = $this->dbConnect();
-        $sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') FROM posts WHERE id = ?';
+        $sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts WHERE id = ?';
         $results = $this->executeRequest($sql, array($postId));
         if ($results->rowCount() == 1) {
             return new Post($results->fetch());  // Accès à la première ligne de résultat
@@ -34,8 +34,7 @@ class PostManager extends Manager
         else {
             throw new Exception("Aucun Post ne correspond à cette recherche");
         }
-        //$post = new Post($results[0]);
-        
+
         return $post;
     }
 }
