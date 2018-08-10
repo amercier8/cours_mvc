@@ -9,9 +9,6 @@ class PostManager extends Manager
 {
     public function getPosts()
     {
-
-        
-        $db = $this->dbConnect();
         $sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5';
         $results = $this->executeRequest($sql);
         $posts = array();
@@ -24,8 +21,6 @@ class PostManager extends Manager
 
     public function getPost($postId)
     {
-        
-        $db = $this->dbConnect();
         $sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts WHERE id = ?';
         $results = $this->executeRequest($sql, array($postId));
         if ($results->rowCount() == 1) {

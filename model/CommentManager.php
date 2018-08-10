@@ -11,8 +11,6 @@ class CommentManager extends Manager
     public function getComments($postId)
     {
         //OOP VERSION OF THE METHOD
-        //Connexion to the DB
-        $db = $this->dbConnect();
         //$sql contains the sql request
         $sql = 'SELECT id, author, comment, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
         //Usage of the execute request method, contained in the Manager
@@ -43,8 +41,6 @@ class CommentManager extends Manager
     {
 
         //TESTS
-        //TO BE REMOVED?
-        $db = $this->dbConnect();
         $sql = 'SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql, array($commentId));
         if ($results->rowCount() == 1) {
@@ -53,9 +49,6 @@ class CommentManager extends Manager
         else {
             throw new Exception ('Aucun commentaire ne correspond');
         }
-
-        return $comment;
-
     }
 
     //modify a comment & return its post_id
@@ -67,14 +60,14 @@ class CommentManager extends Manager
         $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent];
         $comment = new Comment($commentArray);
 
-        $db = $this->dbConnect();
         $sqlUpdate = 'UPDATE comments SET author=? ,comment=? WHERE id=?';
         $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getId()));
 
         $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
         $result = $this->executeRequest($sqlSelect, array($comment->getId()));
+        $result = $result->fetch();
 
-        return $result;
+        return $result['post_id'];
 
     }
 }
