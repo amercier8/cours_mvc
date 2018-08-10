@@ -7,6 +7,7 @@
 <div class="news">
     <h3>
         <?= htmlspecialchars($post->getTitle()); ?>
+        <p>fullPooTest</p>
         <em>le <?= $post->getCreation_date(); ?></em>
     </h3>
     
