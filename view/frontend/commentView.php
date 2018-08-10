@@ -4,7 +4,6 @@
 <h2>Modifier le commentaire</h2>
 
 <form action="index.php?action=modifyComment&amp;id=<?= $comment->getId(); ?>" method="post">
-<p><?= var_dump($comment);?></p>
     <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" value="<?php echo $comment->getAuthor(); ?>" />
