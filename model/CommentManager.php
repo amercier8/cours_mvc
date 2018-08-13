@@ -70,4 +70,18 @@ class CommentManager extends Manager
         return $result['post_id'];
 
     }
+
+    //report a comment
+    public function reportComment($commentId) {
+        $commentContent = ['report' => true, 'id' => $commentId];
+        $comment = new Comment($commentContent);
+        $sql = 'UPDATE comments SET report=? WHERE id=?';
+        $result = $this->executeRequest($sql, array($comment->getReport(), $comment->getId()));
+
+        $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
+        $result = $this->executeRequest($sqlSelect, array($comment->getId()));
+        $result = $result->fetch();
+        return $result['post_id'];
+
+    }
 }

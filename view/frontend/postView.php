@@ -41,7 +41,7 @@
     <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
     <!-- I add a link to redirect to commentView.php (displaying a comment alone), before modifying it eventually -->
     <p><a href="index.php?action=displayComment&amp;id=<?= $comment->getId(); ?>">Editer le commentaire</a></p>
-    <p><a href="TOBEDEFINED">Signaler le commentaire</a></p>
+    <p><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
 
 
 <?php endforeach; ?>

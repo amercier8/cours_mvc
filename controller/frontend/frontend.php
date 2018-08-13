@@ -70,4 +70,9 @@ class ctrlFrontend {
     header('Location: index.php?action=post&id=' .$idBillet);
 }
 
+    public function reportComment($comment) {
+        $postId = $this->commentManager->reportComment($comment);
+        
+        header('Location: index.php?action=post&id=' .$postId);
+    }
 }

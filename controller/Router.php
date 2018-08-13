@@ -54,7 +54,12 @@ class Router {
                             header('Location: index.php?action=displayComment&id=' .$_GET['id']);
                         }
                     }
-                }
+                }               
+                else if ($_GET['action'] == 'reportComment') {
+                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                        $this->ctrlFrontend->reportComment($_GET['id']);
+                    }
+                } 
             }  
             else {
                 $this->ctrlFrontend->listPosts();

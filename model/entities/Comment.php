@@ -3,6 +3,10 @@ class Comment {
     private $postId;
     private $id, $author, $comment, $commentDate;
 
+    private $status;
+    //I set a default value of false to $report. It will only be changed if a user concretely reports the comment
+    private $report = false;
+
     //Function hydrate to add
     public function hydrate (array $donnees) {
         foreach ($donnees as $key => $value) {
@@ -45,6 +49,17 @@ class Comment {
         $this->commentDate = $commentDate;
     }
 
+    public function setStatus($status) {
+        $statuses = array("pending", "disapproved", "approved");
+        if (in_array($status, $statuses)) {
+            $this->status = $status;
+        }
+    }
+
+    public function setReport() {
+            $this->report = true;
+        }
+
 
     //Getters
     public function getPostId() {
@@ -67,5 +82,11 @@ class Comment {
         return $this->commentDate;
     }
 
+    public function getStatus() {
+        return $this->status;
+    }
 
+    public function getReport() {
+        return $this->report;
+    }
 }
