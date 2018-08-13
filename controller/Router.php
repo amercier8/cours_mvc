@@ -1,7 +1,7 @@
 <?php
 
 require_once 'controller/frontend/frontend.php';
-require_once 'view/frontend/VueFrontend';
+require_once 'view/frontend/VueFrontend.php';
 //require_once 'view/frontend/commentView.php';
 //require_once 'view/frontend/listPostsView.php';
 //require_once 'view/frontend/postView.php';
