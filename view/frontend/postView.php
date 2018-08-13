@@ -18,9 +18,7 @@
 
 <h2>Commentaires</h2>
 <?php
-//TEST
-//var_dump($comments);
-//FIN DE TEST
+
 ?>
 
 <form action="index.php?action=addComment&amp;id=<?= $post->getId(); ?>" method="post">
