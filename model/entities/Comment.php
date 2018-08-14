@@ -5,7 +5,7 @@ class Comment {
 
     private $status;
     //I set a default value of false to $report. It will only be changed if a user concretely reports the comment
-    private $report = false;
+    private $report;
 
     //Function hydrate to add
     public function hydrate (array $donnees) {
@@ -56,8 +56,9 @@ class Comment {
         }
     }
 
-    public function setReport() {
-            $this->report = true;
+    public function setReport($report) {
+        //if (is_bool) doesn't seem to work...
+            $this->report = $report;
         }
 
 

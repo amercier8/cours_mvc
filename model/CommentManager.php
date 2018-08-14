@@ -12,7 +12,7 @@ class CommentManager extends Manager
     {
         //OOP VERSION OF THE METHOD
         //$sql contains the sql request
-        $sql = 'SELECT id, author, comment, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
         //Usage of the execute request method, contained in the Manager
         $results = $this->executeRequest($sql, array($postId));
         //Creation of an empty array which is filled with the db data
@@ -21,7 +21,6 @@ class CommentManager extends Manager
             $comment = new Comment($result);
             array_push($comments, $comment);
         }
-
         return $comments;
     }
 
@@ -41,7 +40,7 @@ class CommentManager extends Manager
     {
 
         //TESTS
-        $sql = 'SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql, array($commentId));
         if ($results->rowCount() == 1) {
             return new Comment($results->fetch());
@@ -57,11 +56,12 @@ class CommentManager extends Manager
 
         //TESTS
         //Update the comment itself
-        $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent];
+        //Sets the report to false, as the content of the comment has been modified and needs to be reviewed again
+        $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent, 'report' => false];
         $comment = new Comment($commentArray);
 
-        $sqlUpdate = 'UPDATE comments SET author=? ,comment=? WHERE id=?';
-        $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getId()));
+        $sqlUpdate = 'UPDATE comments SET author=?, comment=?, report=? WHERE id=?';
+        $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getReport(), $comment->getId()));
 
         $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
         $result = $this->executeRequest($sqlSelect, array($comment->getId()));
