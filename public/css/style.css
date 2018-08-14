@@ -26,3 +26,8 @@ a
     color: blue;
     font-style: italic;
 }
+/*Hides the report link on a comment if it has already been reported*/
+.report_1
+{
+    display: none;
+}
