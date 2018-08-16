@@ -1,6 +1,7 @@
 <?php
 
 require_once 'controller/frontend/frontend.php';
+require_once 'controller/backend/backend.php';
 require_once 'view/frontend/VueFrontend.php';
 //require_once 'view/frontend/commentView.php';
 //require_once 'view/frontend/listPostsView.php';
@@ -10,6 +11,7 @@ class Router {
 
     public function __construct() {
         $this->ctrlFrontend = new ctrlFrontend();
+        //$this->ctrlBackend = new ctrlBackend();
     }
 
     public function routRequest() {
@@ -59,8 +61,31 @@ class Router {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlFrontend->reportComment($_GET['id']);
                     }
-                } 
-            }  
+                }
+            }
+            //TEST
+            else if(isset($_GET['login'])) {
+                var_dump($_GET['login']);
+                $passTest = "koka";
+                echo('Pass de base = '.$passTest. '<br />');
+                $pass_hache = password_hash($passTest, PASSWORD_DEFAULT);
+                echo $pass_hache. '<br />';
+
+                $passConf = "koko";
+                echo('Pass de conf = '.$passConf. '<br />');
+                $pass_hache_confirmation = password_hash($passConf, PASSWORD_DEFAULT);
+                echo $pass_hache_confirmation. '<br />';
+
+                if (password_verify($passTest, $pass_hache_confirmation)) {
+                    echo 'mdp OK';
+                }
+                else {
+                    echo 'mdp KO';
+                }
+
+                $this->backend->loginBackOffice();
+            }
+            //TEST END
             else {
                 $this->ctrlFrontend->listPosts();
             }

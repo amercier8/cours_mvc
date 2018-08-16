@@ -3,6 +3,7 @@
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p>Derniers billets du blog :</p>
+<p ><a href="index.php?login">Accéder au BackOffice</a></p>
 
 
 <?php foreach ($posts as $post): ?>
