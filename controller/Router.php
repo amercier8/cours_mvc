@@ -11,7 +11,7 @@ class Router {
 
     public function __construct() {
         $this->ctrlFrontend = new ctrlFrontend();
-        //$this->ctrlBackend = new ctrlBackend();
+        $this->ctrlBackend = new ctrlBackend();
     }
 
     public function routRequest() {
@@ -64,7 +64,15 @@ class Router {
                 }
             }
             //TEST
+            else if(isset($_GET['displayLogin'])) {
+                $this->ctrlBackend->displayLoginPage();
+            }
+
             else if(isset($_GET['login'])) {
+                $this->ctrlBackend->verifyPassword($_POST['password']);
+            }
+                
+                /*
                 var_dump($_GET['login']);
                 $passTest = "koka";
                 echo('Pass de base = '.$passTest. '<br />');
@@ -84,7 +92,8 @@ class Router {
                 }
 
                 $this->backend->loginBackOffice();
-            }
+                
+                */
             //TEST END
             else {
                 $this->ctrlFrontend->listPosts();

@@ -8,8 +8,8 @@ class Comment {
     private $report;
 
     //Function hydrate to add
-    public function hydrate (array $donnees) {
-        foreach ($donnees as $key => $value) {
+    public function hydrate (array $data) {
+        foreach ($data as $key => $value) {
             // get the "setter" name corresponding to the attribute
             $method = 'set'.ucfirst($key);
             //Boolean test on the $method parameter
@@ -21,8 +21,8 @@ class Comment {
     }
 
     //constructor to add
-    public function __construct(array $donnees) {
-        $this->hydrate($donnees);
+    public function __construct(array $data) {
+        $this->hydrate($data);
     }
 
     //Setters
