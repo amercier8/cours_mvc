@@ -69,32 +69,9 @@ class Router {
             }
 
             else if(isset($_GET['login'])) {
-                $this->ctrlBackend->verifyPassword($_POST['password']);
+                $this->ctrlBackend->verifyPassword($_POST['psw']);
             }
                 
-                /*
-                var_dump($_GET['login']);
-                $passTest = "koka";
-                echo('Pass de base = '.$passTest. '<br />');
-                $pass_hache = password_hash($passTest, PASSWORD_DEFAULT);
-                echo $pass_hache. '<br />';
-
-                $passConf = "koko";
-                echo('Pass de conf = '.$passConf. '<br />');
-                $pass_hache_confirmation = password_hash($passConf, PASSWORD_DEFAULT);
-                echo $pass_hache_confirmation. '<br />';
-
-                if (password_verify($passTest, $pass_hache_confirmation)) {
-                    echo 'mdp OK';
-                }
-                else {
-                    echo 'mdp KO';
-                }
-
-                $this->backend->loginBackOffice();
-                
-                */
-            //TEST END
             else {
                 $this->ctrlFrontend->listPosts();
             }

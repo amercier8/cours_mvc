@@ -19,9 +19,7 @@ class Password {
 
     //SETTERS
     public function sethashedDbPassword($hashedDbPassword) {
-        if (is_string($hashedDbPassword)) {
             $this->hashedDbPassword = $hashedDbPassword;
-        }
     }
 
     public function setUserPassword($userPassword) {

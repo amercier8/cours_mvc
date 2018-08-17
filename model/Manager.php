@@ -11,7 +11,7 @@ class Manager
     
     protected function dbConnect()
     {
-        $db = new \PDO('mysql:host=localhost;dbname=tests;charset=utf8', 'root', 'root');
+        $db = new \PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
         return $db;
     }
     
@@ -32,7 +32,7 @@ class Manager
     private function getBdd() {
         if ($this->bdd == null) {
         // Création de la connexion
-            $this->bdd = new PDO('mysql:host=localhost;dbname=tests;charset=utf8',
+            $this->bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8',
             'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
     return $this->bdd;

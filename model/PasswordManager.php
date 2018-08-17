@@ -12,22 +12,22 @@ class PasswordManager extends Manager
         $sql='SELECT content FROM password';
         $hashedDbPassword = $this->executeRequest($sql);
         return $hashedDbPassword;
-        //$this->hashedDbPassword = new Password($result);
     }
 
-    /*
-    public function getHashedUserPassword($userPassword) {
-        $this->hashedUserPassword = password_hash($userPassword, PASSWORD_DEFAULT);
-    }*/
-
     public function verifyPassword($userPassword) {
-        $this->hashedDbPassword=getHashedDbPassword();
-        $password = new Password($hashedDbPassword, $userPassword);
-        if ((password_verify($password->getUserPassword(), $password->getHashedDbPassword))) {
+
+        $result = $this->getHashedDbPassword();
+        $hashedDbPassword = $result->fetch();
+
+        $passwordContent = ['userPassword' => $userPassword, 'hashedDbPassword' => $hashedDbPassword[0]];
+        $password = new Password($passwordContent);
+        if ((password_verify($password->getUserPassword(), $password->getHashedDbPassword()))) {
             echo 'OK';
+            return true;
         }
         else {
             echo 'KO';
+            return false;
         }
     }
 }
