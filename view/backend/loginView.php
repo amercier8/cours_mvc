@@ -1,5 +1,7 @@
 <?php $title = "Accéder au Back-Office"; ?>
 
+<?php ob_start(); ?>
+
 <h2>Accéder au Back-Office</h2>
 
 <form action="index.php?login" method="post">
@@ -8,6 +10,7 @@
         <input type="password" placeholder="Renseignez le mot de passe" name="psw" required/>
         <input type="submit" value="Valider le mot de passe"/>
     </div>
+    <?php var_dump($_SESSION['loggedIn'])?>
 </form> 
 
 <?php $content = ob_get_clean(); ?>

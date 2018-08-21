@@ -1,5 +1,5 @@
 <?php
-session_start(); // On démarre la session AVANT toute chose
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,6 @@ session_start(); // On démarre la session AVANT toute chose
     </head>
         
     <body>
-        <h1>Bienvenue l'Administration du Blog</h1>
         <?= $content ?>
     </body>
 </html>

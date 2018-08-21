@@ -1,5 +1,5 @@
 <?php
-session_start(); // On démarre la session AVANT toute chose
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,8 @@ session_start(); // On démarre la session AVANT toute chose
     </head>
         
     <body>
-        <h1>Bienvenue sur le Back-Office</h1>
+        <h1>BackOffice</h1>
+        <p><a href="index.php?action=disconnect">Se déconnecter</a></p>
         <?= $content ?>
     </body>
 </html>

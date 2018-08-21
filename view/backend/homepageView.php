@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <h2>Back-Office Homepage</h2>
 
-<p>Bienvenue sur le backoffice</p>
+<p>Ici vous pouvez gérer tous les articles de votre blog!</p>
 
 <?php $content = ob_get_clean(); ?>
 

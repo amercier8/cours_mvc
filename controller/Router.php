@@ -1,4 +1,7 @@
 <?php
+//Tests
+session_start();
+//End Tests
 
 require_once 'controller/frontend/frontend.php';
 require_once 'controller/backend/backend.php';
@@ -62,13 +65,13 @@ class Router {
                         $this->ctrlFrontend->reportComment($_GET['id']);
                     }
                 }
-            }
-            //TEST
-            /*
-            else if (isset($_GET['forbidden'])) {
 
+                //This is not working properly?
+                else if($_GET['action'] == 'disconnect') {
+                    $this->ctrlBackend->disconnect();
+                }
             }
-            */
+
             else if(isset($_GET['displayLogin'])) {
                 $this->ctrlBackend->displayLoginPage();
             }
