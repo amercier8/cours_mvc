@@ -1,4 +1,5 @@
 <?php
+//TO BE DELETED
 class Password {
     private $hashedDbPassword, $userPassword;
 

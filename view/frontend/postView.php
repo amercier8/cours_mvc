@@ -41,7 +41,15 @@
     <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
     <!-- I add a link to redirect to commentView.php (displaying a comment alone), before modifying it eventually -->
     <p><a href="index.php?action=displayComment&amp;id=<?= $comment->getId(); ?>">Editer le commentaire</a></p>
-    <p class="report_<?=$comment->getReport();?>"><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
+    <?php
+        if (!$comment->getReport()) {
+    ?>
+    <p><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
+    <!-- <p class="report_<?=$comment->getReport();?>"><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p> -->
+    <?php
+        }
+    ?>
+
 <?php endforeach; ?>
 
 <?php $content = ob_get_clean(); ?>

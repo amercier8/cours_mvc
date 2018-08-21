@@ -25,6 +25,7 @@ class ctrlBackend {
     public function verifyPassword($userPassword) {
         if($_SESSION['loggedIn'] === true) {
             var_dump($_SESSION['loggedIn']);
+            //A passer en header location via indexphp - rajouter une action = dashboard ; pour repasser par le routeur
             require('view/backend/homepageView.php');
         }
         else {
@@ -48,5 +49,4 @@ class ctrlBackend {
         require('view/backend/loginView.php');
     }
 
-    //PUBLIC FUNCTION DISCONNECT???
 }

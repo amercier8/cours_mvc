@@ -1,7 +1,4 @@
 <?php
-//Tests
-session_start();
-//End Tests
 
 require_once 'controller/frontend/frontend.php';
 require_once 'controller/backend/backend.php';
@@ -89,6 +86,4 @@ class Router {
         }
     }
 }
-
-
 ?>
