@@ -22,12 +22,10 @@ class PasswordManager extends Manager
         $passwordContent = ['userPassword' => $userPassword, 'hashedDbPassword' => $hashedDbPassword[0]];
         $password = new Password($passwordContent);
         if ((password_verify($password->getUserPassword(), $password->getHashedDbPassword()))) {
-            echo 'OK';
-            return true;
+            $_SESSION['loggedIn'] = true;
         }
         else {
-            echo 'KO';
-            return false;
+            $_SESSION['loggedIn'] = false;
         }
     }
 }

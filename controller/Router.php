@@ -64,6 +64,11 @@ class Router {
                 }
             }
             //TEST
+            /*
+            else if (isset($_GET['forbidden'])) {
+
+            }
+            */
             else if(isset($_GET['displayLogin'])) {
                 $this->ctrlBackend->displayLoginPage();
             }
