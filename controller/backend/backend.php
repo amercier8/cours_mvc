@@ -71,4 +71,15 @@ class ctrlBackend {
         $this->postManager->modifyPost($postId, $postTitle, $postContent);
         header('Location: index.php?action=displayDashboard');
     }
+
+    public function addPost($postTitle, $postContent) {
+        $affectedLines = $this->postManager->addPost($postTitle, $postContent);
+
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le billet !');
+        }
+        else {
+            header('Location: index.php?action=displayDashboard');
+        }
+    }
 }

@@ -29,8 +29,6 @@ class PostManager extends Manager
         else {
             throw new Exception("Aucun Post ne correspond à cette recherche");
         }
-
-        return $post;
     }
 
     public function deletePost($postId) {
@@ -45,6 +43,13 @@ class PostManager extends Manager
 
         $sql = 'UPDATE posts SET title=?, content=? WHERE id=?';
         $result = $this->executeRequest($sql, array($post->getTitle(), $post->getContent(), $post->getId()));
+    }
 
+    public function addPost($postTitle, $postContent) {
+        $postArray = ['title' => $postTitle, 'content' => $postContent];
+        $post = new Post($postArray);
+
+        $sql = 'INSERT INTO posts(title, content) VALUES(?,?)';
+        $this->executeRequest($sql, array($post->getTitle(), $post->getContent()));
     }
 }

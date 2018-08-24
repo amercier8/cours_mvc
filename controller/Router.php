@@ -63,6 +63,15 @@ class Router {
                     }
                 }
 
+                elseif ($_GET['action'] == 'addPost') {
+                    if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                        $this->ctrlBackend->addPost($_POST['title'], $_POST['content']);
+                    }
+                    else {
+                        throw new Exception('Il reste des éléments à renseigner');
+                    }
+                }
+
                 //This is not working properly?
                 else if($_GET['action'] == 'disconnect') {
                     $this->ctrlBackend->disconnect();
@@ -97,7 +106,7 @@ class Router {
                             header('Location: index.php?action=displayPost&id=' .$_GET['id']);
                         }
                     }
-                }   
+                }
             }
 
             else if(isset($_GET['displayLogin'])) {

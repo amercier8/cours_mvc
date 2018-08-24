@@ -5,6 +5,20 @@
 
 <p>Ici vous pouvez gérer tous les articles de votre blog!</p>
 <p>Rédiger un nouvel article</p>
+<form action="index.php?action=addPost" method="post">
+<div>
+        <label for="title">Titre du billet</label><br />
+        <input type="text" id="title" name="title" />
+    </div>
+    <div>
+        <label for="content">Corps du billet</label><br />
+        <textarea id="content" name="content"></textarea>
+    </div>
+    <div>
+        <input type="submit" />
+    </div>
+</form>
+
 
 <?php foreach ($posts as $post): ?>
 <div>
