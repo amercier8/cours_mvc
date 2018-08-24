@@ -32,4 +32,19 @@ class PostManager extends Manager
 
         return $post;
     }
+
+    public function deletePost($postId) {
+        $sql = 'DELETE FROM posts WHERE id=?';
+        $results = $this->executeRequest($sql, array($postId));
+    }
+
+    public function modifyPost($postId, $postTitle, $postContent) {
+        $postArray = ['id' => $postId, 'title' => $postTitle, 'content' => $postContent];
+        $post = new Post($postArray);
+        //var_dump($post);
+
+        $sql = 'UPDATE posts SET title=?, content=? WHERE id=?';
+        $result = $this->executeRequest($sql, array($post->getTitle(), $post->getContent(), $post->getId()));
+
+    }
 }

@@ -34,3 +34,8 @@ Hides the report link on a comment if it has already been reported
     display: none;
 }
 */
+
+html body div h3
+{
+    width: 50%;
+}

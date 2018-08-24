@@ -40,7 +40,7 @@ class CommentManager extends Manager
     {
 
         //TESTS
-        $sql = 'SELECT id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE id = ? ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql, array($commentId));
         if ($results->rowCount() == 1) {
             return new Comment($results->fetch());
@@ -68,7 +68,6 @@ class CommentManager extends Manager
         $result = $result->fetch();
 
         return $result['post_id'];
-
     }
 
     //report a comment
@@ -82,6 +81,18 @@ class CommentManager extends Manager
         $result = $this->executeRequest($sqlSelect, array($comment->getId()));
         $result = $result->fetch();
         return $result['post_id'];
-
     }
+
+    //Retrieve all comments (To be used by the Dashboard view)
+    //Really usefull??
+    public function getAllComments() {
+        $sql = 'SELECT id, post_id AS postId, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date DESC LIMIT 0, 5';
+        $results = $this->executeRequest($sql);
+        $comments = array();
+        foreach ($results as $result) {
+            $comment = new Comment($result);
+            array_push($comments, $comment);
+        }
+        return $comments;
+    }    
 }
