@@ -1,8 +1,5 @@
 <?php
 
-//Revoir le concept de namespace en profondeur
-//namespace OpenClassrooms\Blog\Model;
-
 require_once("model/Manager.php");
 require_once("model/entities/Comment.php");
 
@@ -38,8 +35,6 @@ class CommentManager extends Manager
     //Get a specific comment to display
     public function getComment($commentId)
     {
-
-        //TESTS
         $sql = 'SELECT id, author, comment, report, status DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE id = ? ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql, array($commentId));
         if ($results->rowCount() == 1) {
@@ -53,16 +48,16 @@ class CommentManager extends Manager
     //modify a comment & return its post_id
     public function modifyComment($commentId, $commentAuthor, $commentContent)
     {
-
-        //TESTS
         //Update the comment itself
         //Sets the report to false, as the content of the comment has been modified and needs to be reviewed again
         $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent, 'report' => false];
         $comment = new Comment($commentArray);
 
+        //First Update the comment
         $sqlUpdate = 'UPDATE comments SET author=?, comment=?, report=? WHERE id=?';
         $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getReport(), $comment->getId()));
 
+        //Second, Select the Post on which the comment is linked to return it
         $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
         $result = $this->executeRequest($sqlSelect, array($comment->getId()));
         $result = $result->fetch();
@@ -70,13 +65,14 @@ class CommentManager extends Manager
         return $result['post_id'];
     }
 
-    //report a comment
     public function reportComment($commentId) {
+        //First Update the comment, to set its "report" property to true
         $commentContent = ['report' => true, 'id' => $commentId];
         $comment = new Comment($commentContent);
         $sql = 'UPDATE comments SET report=? WHERE id=?';
         $result = $this->executeRequest($sql, array($comment->getReport(), $comment->getId()));
 
+        //Second, Select the Post on which the comment is linked to return it
         $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
         $result = $this->executeRequest($sqlSelect, array($comment->getId()));
         $result = $result->fetch();
@@ -84,7 +80,6 @@ class CommentManager extends Manager
     }
 
     //Retrieve all comments (To be used by the Dashboard view)
-    //Really usefull??
     public function getAllComments() {
         $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql);
@@ -95,7 +90,7 @@ class CommentManager extends Manager
         }
         return $comments;
     }
-    
+    //By default, a newly created comment has its "status" property set to "pending". This is configured in the DB directly
     public function approveComment($commentId) {
         $commentContent = ['status' => 'approved', 'id' => $commentId];
         $comment = new Comment($commentContent);
