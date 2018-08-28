@@ -86,7 +86,7 @@ class CommentManager extends Manager
     //Retrieve all comments (To be used by the Dashboard view)
     //Really usefull??
     public function getAllComments() {
-        $sql = 'SELECT id, post_id AS postId, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date DESC LIMIT 0, 5';
+        $sql = 'SELECT id, post_id AS postId, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date';
         $results = $this->executeRequest($sql);
         $comments = array();
         foreach ($results as $result) {

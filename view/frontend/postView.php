@@ -35,7 +35,7 @@
     </div>
 </form>
 
-
+<?= var_dump($comments);?>
 <?php foreach ($comments as $comment): ?>
 <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
     <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>

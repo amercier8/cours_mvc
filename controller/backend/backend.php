@@ -30,7 +30,7 @@ class ctrlBackend {
 
     public function verifyPassword($userPassword) {
         if($_SESSION['loggedIn'] === true) {
-            var_dump($_SESSION['loggedIn']);
+            //var_dump($_SESSION['loggedIn']);
             //A passer en header location via indexphp - rajouter une action = dashboard ; pour repasser par le routeur
             //require('view/backend/homepageView.php');
             header('Location: index.php?action=displayDashboard');
@@ -38,7 +38,7 @@ class ctrlBackend {
         else {
             $passwordVerified = $this->passwordManager->verifyPassword($userPassword);
             if($_SESSION['loggedIn'] === true) {
-                var_dump($_SESSION['loggedIn']);
+                //var_dump($_SESSION['loggedIn']);
                 header('Location: index.php?action=displayDashboard');
             }
             else {

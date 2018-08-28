@@ -26,24 +26,33 @@
         <?= htmlspecialchars($post->getTitle()) ;?>
         <em>le <?= $post->getCreation_date(); ?></em>
     </h3>
+    <p>ID = <?= $post->getId();?></p>
     <p><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>">Editer l'article</a></p>
     <em><a href="index.php?action=delete&amp;id=<?= $post->getId(); ?>">Supprimer l'article</a></em>
     <p>
         <!-- <?= nl2br(htmlspecialchars($post->getContent())); ?> -->
-        <br />
-        <em><a href="index.php?action=post&amp;id=<?= $post->getId(); ?>">Commentaires</a></em>
         <!-- L'objectif ici est de parvenir à voir pour chaque post, si'l comporte au moins un commentaire en attente de modération et un commentaire signalé-->
         <h4>Commentaires</h4>
-        
-
+        <!-- TESTS -->
+        <?php $postId = $post->getId();?>
         <p>
-            <?php
-                foreach ($comments as $comment): ?>
-                    <p> <?= $comment->getReport(); ?> </p>
-                <?php endforeach;
-            ?>
-            
+        <?php foreach ($comments as $comment):
+            $commentId = $comment->getPostId();
+            if ($commentId === $postId) {
+                ?>
+                    <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
+                    <p><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>">Modérer positivement</a></p>
+                    <p><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>">Modérer négativement</a></p>
+                    <?php
+                    if ($comment->getReport() == true) {
+                        ?>
+                        <p>Signalé</p>
+                        <?php
+                    }
+            }
+        endforeach; ?>
         </p>
+        <!-- -->
     </p>
 </div>
 <?php endforeach; ?>
