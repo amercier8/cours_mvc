@@ -37,12 +37,29 @@
         <?php $postId = $post->getId();?>
         <p>
         <?php foreach ($comments as $comment):
-            $commentId = $comment->getPostId();
-            if ($commentId === $postId) {
+            $commentPostId = $comment->getPostId();
+            if ($commentPostId === $postId) {
                 ?>
                     <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
-                    <p><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>">Modérer positivement</a></p>
-                    <p><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>">Modérer négativement</a></p>
+                    <?php
+                    if ($comment->getStatus() === "approved") {
+                        ?>
+                        <p>Commentaire modéré postivement</p>
+                        <?php
+                    }
+                    else if ($comment->getStatus() === "disapproved") {
+                        ?>
+                        <p>Commentaire modéré négativement</p>
+                        <?php
+                    }
+                    else {
+                        ?>
+                        <p>Vous n'avez pas encore modéré ce commentaire</p>
+                        <?php
+                    }
+                    ?>
+                    <p><a href="index.php?action=approveComment&amp;id=<?= $comment->getId(); ?>">Modérer positivement</a></p>
+                    <p><a href="index.php?action=disapproveComment&amp;id=<?= $comment->getId(); ?>">Modérer négativement</a></p>
                     <?php
                     if ($comment->getReport() == true) {
                         ?>

@@ -35,22 +35,27 @@
     </div>
 </form>
 
-<?= var_dump($comments);?>
-<?php foreach ($comments as $comment): ?>
-<p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
+<?php foreach ($comments as $comment):
+if ($comment->getStatus() !== "disapproved") {
+    ?>
+    <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
     <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
     <!-- I add a link to redirect to commentView.php (displaying a comment alone), before modifying it eventually -->
     <p><a href="index.php?action=displayComment&amp;id=<?= $comment->getId(); ?>">Editer le commentaire</a></p>
     <?php
-        if (!$comment->getReport()) {
-    ?>
-    <p><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
-    <!-- <p class="report_<?=$comment->getReport();?>"><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p> -->
-    <?php
-        }
-    ?>
-
-<?php endforeach; ?>
+    if (!$comment->getReport() && $comment->getStatus() == "pending") {
+        ?>
+        <p><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
+        <!-- <p class="report_<?=$comment->getReport();?>"><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p> -->
+        <?php
+    }
+    else {
+        ?>
+        <p>Ce commentaire a déjà été signalé par un autre utilisateur ou modéré positivement par l'Administrateur.</p>
+        <?php
+    }
+}
+endforeach; ?>
 
 <?php $content = ob_get_clean(); ?>
 

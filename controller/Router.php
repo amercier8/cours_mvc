@@ -107,6 +107,19 @@ class Router {
                         }
                     }
                 }
+
+                elseif ($_GET['action'] == 'approveComment') {
+                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $this->ctrlBackend->approveComment($_GET['id']);
+                    }
+                }
+
+                elseif ($_GET['action'] == 'disapproveComment') {
+                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $this->ctrlBackend->disapproveComment($_GET['id']);
+                    }
+                }
+
             }
 
             else if(isset($_GET['displayLogin'])) {

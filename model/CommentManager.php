@@ -12,7 +12,7 @@ class CommentManager extends Manager
     {
         //OOP VERSION OF THE METHOD
         //$sql contains the sql request
-        $sql = 'SELECT id, author, comment, report, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, status, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
         //Usage of the execute request method, contained in the Manager
         $results = $this->executeRequest($sql, array($postId));
         //Creation of an empty array which is filled with the db data
@@ -40,7 +40,7 @@ class CommentManager extends Manager
     {
 
         //TESTS
-        $sql = 'SELECT id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, status DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE id = ? ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql, array($commentId));
         if ($results->rowCount() == 1) {
             return new Comment($results->fetch());
@@ -86,7 +86,7 @@ class CommentManager extends Manager
     //Retrieve all comments (To be used by the Dashboard view)
     //Really usefull??
     public function getAllComments() {
-        $sql = 'SELECT id, post_id AS postId, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date';
+        $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql);
         $comments = array();
         foreach ($results as $result) {
@@ -94,5 +94,19 @@ class CommentManager extends Manager
             array_push($comments, $comment);
         }
         return $comments;
-    }    
+    }
+    
+    public function approveComment($commentId) {
+        $commentContent = ['status' => 'approved', 'id' => $commentId];
+        $comment = new Comment($commentContent);
+        $sql = 'UPDATE comments SET status=? WHERE id=?';
+        $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
+    }
+
+    public function disapproveComment($commentId) {
+        $commentContent = ['status' => 'disapproved', 'id' => $commentId];
+        $comment = new Comment($commentContent);
+        $sql = 'UPDATE comments SET status=? WHERE id=?';
+        $result = $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
+    }
 }

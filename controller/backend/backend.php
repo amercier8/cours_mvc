@@ -82,4 +82,14 @@ class ctrlBackend {
             header('Location: index.php?action=displayDashboard');
         }
     }
+
+    public function approveComment($commentId) {
+        $this->commentManager->approveComment($commentId);
+        header('Location: index.php?action=displayDashboard');
+    }
+
+    public function disapproveComment($commentId) {
+        $this->commentManager->disapproveComment($commentId);
+        header('Location: index.php?action=displayDashboard');
+    }
 }
