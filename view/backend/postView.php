@@ -10,7 +10,7 @@
     </div>
     <div>
         <label for="content">Contenu de l'Article</label><br />
-        <textarea id="content" name="content" ><?php echo $post->getContent(); ?></textarea>
+        <textarea class="mytextarea" name="content" ><?php echo $post->getContent(); ?></textarea>
     </div>
     <div>
         <input type="submit" value="Valider"/>

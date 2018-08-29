@@ -92,4 +92,14 @@ class ctrlBackend {
         $this->commentManager->disapproveComment($commentId);
         header('Location: index.php?action=displayDashboard');
     }
+
+    //TO BE DONE
+    /*
+    public function countReportedComments($postId) {
+        $this->CommentManager->countReportedComments($postId);
+        return
+        header('Location: index.php?action=displayDashboard');
+
+    }
+    */
 }

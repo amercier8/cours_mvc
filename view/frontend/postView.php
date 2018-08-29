@@ -12,7 +12,7 @@
     </h3>
     
     <p>
-        <?= nl2br(htmlspecialchars($post->getContent())); ?>
+        <?= $post->getContent(); ?>
     </p>
 </div>
 

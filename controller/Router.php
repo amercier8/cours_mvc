@@ -69,6 +69,7 @@ class Router {
                 else if ($_GET['action'] == 'displayDashboard') {
                     //var_dump('toto');
                     $this->ctrlBackend->listPosts();
+                    //$this->ctrlBackend->countReportedComments()
                 }
 
                 else if ($_GET['action'] == 'delete') {

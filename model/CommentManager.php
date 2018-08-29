@@ -85,6 +85,14 @@ class CommentManager extends Manager
         $result = $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
     }
 
+    //TO BE DONE
+    /*
+    public function countReportedComments($postId) {
+        $sql = 'SELECT COUNT(report) FROM comments WHERE post_id=?'; 
+        $this->executeRequest($sql, [$postId]);
+    }
+    */
+
         //This function is functionnal, but not used in this project. It could with a front user management system.
     //modify a comment & return its post_id
     /*

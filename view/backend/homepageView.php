@@ -13,12 +13,35 @@
     </div>
     <div>
         <label for="content">Corps du billet</label><br />
-        <textarea id="content" name="content"></textarea>
+        <textarea class="mytextarea" name="content"></textarea>
     </div>
     <div>
         <input type="submit" />
     </div>
 </form>
+
+<!-- Test sous forme de tableau -->
+<table>
+    <tr>
+        <th>Titre du Billet</th>
+        <th>Date de rédaction</th>
+        <th>Commentaires en attente de modération</th>
+        <th>Commentaires signalés</th>        
+    </tr>
+    <?php foreach ($posts as $post):
+    ?>
+    <tr>
+        <td><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>"><?= htmlspecialchars($post->getTitle()) ;?></a></td>
+        <td><?= $post->getCreation_date(); ?></td>
+        
+        <td>bla</td>
+        <td>bla</td>
+    </tr>
+    <?php
+    endforeach;
+    ?>
+</table>
+
 
 
 <?php foreach ($posts as $post): ?>
