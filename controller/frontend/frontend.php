@@ -55,20 +55,19 @@ class ctrlFrontend {
     //$commentManager = new CommentManager();
 
     $comment = $this->commentManager->getComment($commentId);
-    // Trouble shooting missing
     //with this function, we redirect to commentView.php and transmit the commentId
     require('view/frontend/commentView.php');
 }
 
+    //This is functionnal, but not used in this project. It could with a front user management system.
+    /*
     public function modifyComment($commentId, $commentAuthor, $commentContent) {
-    //$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
-    //$commentManager = new CommentManager();
-
     //Modify idBillet - Rcupérer la valeur du return via $idBillet
     $idBillet = $this->commentManager->modifyComment($commentId, $commentAuthor, $commentContent);
 
     header('Location: index.php?action=post&id=' .$idBillet);
 }
+*/
 
     public function reportComment($comment) {
         $postId = $this->commentManager->reportComment($comment);

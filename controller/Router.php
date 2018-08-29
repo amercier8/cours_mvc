@@ -45,18 +45,7 @@ class Router {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlFrontend->displayComment($_GET['id']);
                     }
-                }
-                elseif ($_GET['action'] == 'modifyComment') {
-                    if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        //TODO : Je ne vérifie que si elles ne sont pas vides
-                        if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                            $this->ctrlFrontend->modifyComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                        }
-                        else {
-                            header('Location: index.php?action=displayComment&id=' .$_GET['id']);
-                        }
-                    }
-                }               
+                }          
                 else if ($_GET['action'] == 'reportComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlFrontend->reportComment($_GET['id']);
@@ -120,6 +109,20 @@ class Router {
                     }
                 }
 
+                //This below is functionnal but not used in this project. It would need a front-end user management system.
+                /*             
+                elseif ($_GET['action'] == 'modifyComment') {
+                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                        //TODO : Je ne vérifie que si elles ne sont pas vides
+                        if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                            $this->ctrlFrontend->modifyComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                        }
+                        else {
+                            header('Location: index.php?action=displayComment&id=' .$_GET['id']);
+                        }
+                    }
+                } 
+                */
             }
 
             else if(isset($_GET['displayLogin'])) {

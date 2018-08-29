@@ -35,7 +35,7 @@ class CommentManager extends Manager
     //Get a specific comment to display
     public function getComment($commentId)
     {
-        $sql = 'SELECT id, author, comment, report, status DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE id = ? ORDER BY comment_date DESC';
         $results = $this->executeRequest($sql, array($commentId));
         if ($results->rowCount() == 1) {
             return new Comment($results->fetch());
@@ -43,26 +43,6 @@ class CommentManager extends Manager
         else {
             throw new Exception ('Aucun commentaire ne correspond');
         }
-    }
-
-    //modify a comment & return its post_id
-    public function modifyComment($commentId, $commentAuthor, $commentContent)
-    {
-        //Update the comment itself
-        //Sets the report to false, as the content of the comment has been modified and needs to be reviewed again
-        $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent, 'report' => false];
-        $comment = new Comment($commentArray);
-
-        //First Update the comment
-        $sqlUpdate = 'UPDATE comments SET author=?, comment=?, report=? WHERE id=?';
-        $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getReport(), $comment->getId()));
-
-        //Second, Select the Post on which the comment is linked to return it
-        $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
-        $result = $this->executeRequest($sqlSelect, array($comment->getId()));
-        $result = $result->fetch();
-
-        return $result['post_id'];
     }
 
     public function reportComment($commentId) {
@@ -104,4 +84,27 @@ class CommentManager extends Manager
         $sql = 'UPDATE comments SET status=? WHERE id=?';
         $result = $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
     }
+
+        //This function is functionnal, but not used in this project. It could with a front user management system.
+    //modify a comment & return its post_id
+    /*
+    public function modifyComment($commentId, $commentAuthor, $commentContent)
+    {
+        //Update the comment itself
+        //Sets the report to false, as the content of the comment has been modified and needs to be reviewed again
+        $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent, 'report' => false];
+        $comment = new Comment($commentArray);
+
+        //First Update the comment
+        $sqlUpdate = 'UPDATE comments SET author=?, comment=?, report=? WHERE id=?';
+        $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getReport(), $comment->getId()));
+
+        //Second, Select the Post on which the comment is linked to return it
+        $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
+        $result = $this->executeRequest($sqlSelect, array($comment->getId()));
+        $result = $result->fetch();
+
+        return $result['post_id'];
+    }
+    */
 }

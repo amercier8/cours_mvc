@@ -41,12 +41,11 @@ if ($comment->getStatus() !== "disapproved") {
     <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
     <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
     <!-- I add a link to redirect to commentView.php (displaying a comment alone), before modifying it eventually -->
-    <p><a href="index.php?action=displayComment&amp;id=<?= $comment->getId(); ?>">Editer le commentaire</a></p>
+    <!-- <p><a href="index.php?action=displayComment&amp;id=<?= $comment->getId(); ?>">Editer le commentaire</a></p> -->
     <?php
     if (!$comment->getReport() && $comment->getStatus() == "pending") {
         ?>
         <p><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
-        <!-- <p class="report_<?=$comment->getReport();?>"><a href="index.php?action=reportComment&amp;id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p> -->
         <?php
     }
     else {

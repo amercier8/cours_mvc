@@ -14,7 +14,7 @@
         </h3>
         
         <p>
-            <?= nl2br(htmlspecialchars($post->getContent())); ?>
+            <?= $post->getContent(); ?>
             <br />
             <em><a href="index.php?action=post&amp;id=<?= $post->getId(); ?>">Commentaires</a></em>
         </p>
