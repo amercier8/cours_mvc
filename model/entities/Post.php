@@ -1,6 +1,7 @@
 <?php
 class Post {
     private $id, $title, $content, $creation_date;
+    private $reportedComments, $commentsWaitingForModeration;
 
     //Hydrate
     public function hydrate (array $data) {
@@ -38,6 +39,16 @@ class Post {
         $this->creation_date = $creation_date;
     }
 
+    public function setCommentsWaitingForModeration($commentsWaitingForModeration)
+    {
+        $this->commentsWaitingForModeration = $commentsWaitingForModeration;
+    }
+
+    public function setReportedComments($reportedComments)
+    {
+        $this->reportedComments = $reportedComments;
+    }
+
 
     //Getters
     public function getId() {
@@ -55,4 +66,14 @@ class Post {
     public function getCreation_date() {
         return $this->creation_date;
     }
+
+    public function getCommentsWaitingForModeration() {
+        return $this->commentsWaitingForModeration;
+    }
+
+    public function getReportedComments() {
+        return $this->reportedComments;
+    }
+
+
 }

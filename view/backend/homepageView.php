@@ -1,6 +1,7 @@
 <?php $title = 'Back-Office Homepage'; ?>
 
 <?php ob_start(); ?>
+<p><a href="index.php?action=disconnect">Se déconnecter</a></p>
 <h2>Back-Office Homepage</h2>
 
 <p>Ici vous pouvez gérer tous les articles de votre blog!</p>
@@ -34,8 +35,8 @@
         <td><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>"><?= htmlspecialchars($post->getTitle()) ;?></a></td>
         <td><?= $post->getCreation_date(); ?></td>
         
-        <td>bla</td>
-        <td>bla</td>
+        <td><?= $post->getcommentsWaitingForModeration(); ?></td>
+        <td><?= $post->getreportedComments(); ?></td>
     </tr>
     <?php
     endforeach;
@@ -61,6 +62,8 @@
         <?php $postId = $post->getId();?>
         <p>
         <?php foreach ($comments as $comment):
+            //TESTS
+            //FIN TESTS
             $commentPostId = $comment->getPostId();
             if ($commentPostId === $postId) {
                 ?>

@@ -61,7 +61,16 @@ class CommentManager extends Manager
 
     //Retrieve all comments (To be used by the Dashboard view)
     public function getAllComments() {
-        $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments ORDER BY comment_date DESC';
+        //Si Signalé et pas modéré, en 1er ; ensuite les non signalés en attente de modération ; ensuite le reste par date.
+        $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments
+        ORDER BY
+            CASE
+                WHEN report=1 AND status="pending" THEN report
+            END DESC,
+            CASE
+                WHEN report!=1 AND status="pending" THEN status
+            END DESC,
+        comment_date DESC';
         $results = $this->executeRequest($sql);
         $comments = array();
         foreach ($results as $result) {
@@ -82,16 +91,21 @@ class CommentManager extends Manager
         $commentContent = ['status' => 'disapproved', 'id' => $commentId];
         $comment = new Comment($commentContent);
         $sql = 'UPDATE comments SET status=? WHERE id=?';
-        $result = $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
+        //$result = $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
+        $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
+
     }
 
     //TO BE DONE
     /*
     public function countReportedComments($postId) {
         $sql = 'SELECT COUNT(report) FROM comments WHERE post_id=?'; 
-        $this->executeRequest($sql, [$postId]);
+        $result = $this->executeRequest($sql, [$postId]);
+        return $result;
+        var_dump($result);
     }
     */
+    
 
         //This function is functionnal, but not used in this project. It could with a front user management system.
     //modify a comment & return its post_id

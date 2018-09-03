@@ -63,7 +63,11 @@ class ctrlBackend {
     }
 
     public function displayPost($postId) {
+        //TEST recup des coms signalés et en attente de com
+        //$this->postManager->getReportedComments
         $post = $this->postManager->getPost($postId);
+        //TEST
+        $comments = $this->commentManager->getAllComments();
         require('view/backend/postView.php');
     }
 
@@ -96,10 +100,9 @@ class ctrlBackend {
     //TO BE DONE
     /*
     public function countReportedComments($postId) {
-        $this->CommentManager->countReportedComments($postId);
-        return
+        $reportedComments = $this->CommentManager->countReportedComments($postId);
+        return $reportedComments;
         header('Location: index.php?action=displayDashboard');
-
     }
     */
 }
