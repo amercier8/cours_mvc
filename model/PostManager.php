@@ -10,7 +10,7 @@ class PostManager extends Manager
     public function getPosts()
     {
         //$sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, reportedComments, commentsWaitingForModeration FROM posts ORDER BY creation_date DESC LIMIT 0, 5';
-        $sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, reportedComments, commentsWaitingForModeration FROM posts ORDER BY creation_date DESC LIMIT 0, 5';
+        $sql = 'SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date, reportedComments, commentsWaitingForModeration FROM posts ORDER BY creation_date DESC';
         $results = $this->executeRequest($sql);
         $posts = array();
         foreach ($results as $result) {

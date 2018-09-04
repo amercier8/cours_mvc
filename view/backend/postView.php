@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <header id="BOHeader">
-    <h1>BackOffice</h1>
+<h1><a href="index.php?action=displayDashboard">BackOffice</a></h1>
     <div id="BOHeaderLinks">
         <p><a href="index.php">Accéder au Blog</a></p>
         <p><a href="index.php?action=disconnect">Se déconnecter</a></p>
@@ -21,10 +21,14 @@
             <label for="content">Contenu de l'Article</label><br />
             <textarea class="mytextarea" name="content" ><?php echo $post->getContent(); ?></textarea>
         </div>
-        <div>
-            <input type="submit" value="Valider"/>
+        <div id="formButtons">
+            <input id="ValidateButton" type="submit" value="Valider"/>
+            <em id="postSuppressionBO"><a href="index.php?action=delete&amp;id=<?= $post->getId(); ?>">Supprimer l'article</a></em>
         </div>
     </form>
+</div>
+<div id="BOHeaderComments">
+    <h2>Commentaires</h2>
 </div>
 <?php foreach ($comments as $comment):
     //TESTS
@@ -33,33 +37,37 @@
     if ($commentPostId === $postId) {
         ?>
             <div class="comment">
-                <p>Ecrit par <?= ($comment->getAuthor()); ?>, le <?= $comment->getCommentDate(); ?></p>
-                <p><?= htmlspecialchars($comment->getComment()); ?></p>
-                <?php
-                if ($comment->getStatus() === "approved") {
-                    ?>
-                    <p class="approved">Statut : Validé</p>
+                <div class="commentBOHeader">
+                    <p>Ecrit par <?= ($comment->getAuthor()); ?>, le <?= $comment->getCommentDate(); ?></p>
                     <?php
-                }
-                else if ($comment->getStatus() === "disapproved") {
+                    if ($comment->getStatus() === "approved") {
+                        ?>
+                        <p class="approved">Statut : Validé</p>
+                        <?php
+                    }
+                    else if ($comment->getStatus() === "disapproved") {
+                        ?>
+                        <p class="disapproved">Statut : Non approuvé</p>
+                        <?php
+                    }
+                    else {
+                        ?>
+                        <p class="pending">Statut : En attente de modération</p>
+                        <?php
+                    }
                     ?>
-                    <p class="disapproved">Statut : Non approuvé</p>
-                    <?php
-                }
-                else {
-                    ?>
-                    <p class="pending">Statut : En attente de modération</p>
-                    <?php
-                }
-                ?>
-                <p>
-                    <a href="index.php?action=approveComment&amp;id=<?= $comment->getId(); ?>">Modérer positivement</a>
-                    <i class="fas fa-thumbs-up"></i>
-                </p>
-                <p>
-                    <a href="index.php?action=disapproveComment&amp;id=<?= $comment->getId(); ?>">Modérer négativement</a>
-                    <i class="fas fa-thumbs-down"></i>
-                </p>
+                </div>
+                <p class="commentContentBO"><?= htmlspecialchars($comment->getComment()); ?></p>
+                <div class="moderationActionsBO">
+                    <p>
+                        <a href="index.php?action=approveComment&amp;id=<?= $comment->getId(); ?>">Modérer positivement</a>
+                        <i class="fas fa-thumbs-up"></i>
+                    </p>
+                    <p>
+                        <a href="index.php?action=disapproveComment&amp;id=<?= $comment->getId(); ?>">Modérer négativement</a>
+                        <i class="fas fa-thumbs-down"></i>
+                    </p>
+                </div>
                 <?php
                 if ($comment->getReport() == true) {
                     ?>
@@ -70,6 +78,9 @@
                 </div>
                 <?php
             }
+            ?>
+        </div>
+        <?php
     }
 endforeach; ?>
 
