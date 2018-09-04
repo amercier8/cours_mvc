@@ -55,6 +55,8 @@ class ctrlBackend {
     public function listPosts() {
         $posts = $this->postManager->getPosts();
         $comments = $this->commentManager->getAllComments();
+        //TESTS
+        /*
         $commentSummary= array("postId"=>'',"numberOfReports"=>'');
         
         foreach ($comments as $comment):
@@ -78,6 +80,8 @@ class ctrlBackend {
         var_dump($commentSummary);
         //var_dump($commentSummary2);
         //var_dump($numberOfComments);
+        */
+        //FIN TESTS
         require('view/backend/homepageView.php');
     }
 

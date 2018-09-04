@@ -1,27 +1,35 @@
 <?php $title = 'Back-Office Homepage'; ?>
 
 <?php ob_start(); ?>
-<p><a href="index.php?action=disconnect">Se déconnecter</a></p>
-<h2>Back-Office Homepage</h2>
+<header id="BOHeader">
+    <h1>BackOffice</h1>
+    <div id="BOHeaderLinks">
+        <p><a href="index.php">Accéder au Blog</a></p>
+        <p><a href="index.php?action=disconnect">Se déconnecter</a></p>
+    </div>
+</header>
 
-<p>Ici vous pouvez gérer tous les articles de votre blog!</p>
-<p>Rédiger un nouvel article</p>
+<div class="articleForm">
+    <h2>Rédiger un nouvel article --</h2>
 
-<form action="index.php?action=addPost" method="post">
-    <div>
-        <label for="title">Titre du billet</label><br />
-        <input type="text" id="title" name="title" required/>
-    </div>
-    <div>
-        <label for="content">Corps du billet</label><br />
-        <textarea class="mytextarea" name="content"></textarea>
-    </div>
-    <div>
-        <input type="submit" />
-    </div>
-</form>
+    <form action="index.php?action=addPost" method="post">
+        <div>
+            <label for="title">Titre du billet</label><br />
+            <input type="text" id="title" name="title" required/>
+        </div>
+        <div>
+            <label for="content">Corps du billet</label><br />
+            <textarea class="mytextarea" name="content"></textarea>
+        </div>
+        <div>
+            <input type="submit" />
+        </div>
+    </form>
+</div>
 
 <!-- Test sous forme de tableau -->
+
+<h2>Articles</h2>
 <table>
     <tr>
         <th>Titre du Billet</th>

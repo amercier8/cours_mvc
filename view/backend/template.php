@@ -9,8 +9,6 @@
     </head>
         
     <body>
-        <h1>BackOffice</h1>
-        <p><a href="index.php">Accéder au Blog</a></p>
         <?= $content ?>
 
         <script src="public/js/tinyMce.js"></script>
