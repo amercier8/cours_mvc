@@ -173,3 +173,13 @@ h2
     width: 60%;
     justify-content: center;
 }
+
+.signaledCommentsNumber
+{
+    color: #f67944;
+}
+
+.moderationPendingNumber
+{
+    color: #2677bb;
+}

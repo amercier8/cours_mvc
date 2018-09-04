@@ -56,32 +56,16 @@ class ctrlBackend {
         $posts = $this->postManager->getPosts();
         $comments = $this->commentManager->getAllComments();
         //TESTS
-        /*
-        $commentSummary= array("postId"=>'',"numberOfReports"=>'');
-        
-        foreach ($comments as $comment):
-            $postId = $comment->getPostId();
-            //$report = $comment->getReport();
-            //$numberOfReports = 0;
+        $commentsResume=[];
+        foreach($comments as $comment) {
+            if($comment->getReport() == true) {
+                $commentsResume[$comment->getPostId()]['signaled']=$commentsResume[$comment->getPostId()]['signaled']+1;
+            }
+            if ($comment->getStatus() == 'pending') {
+                $commentsResume[$comment->getPostId()]['moderationPending']=$commentsResume[$comment->getPostId()]['moderationPending']+1;
+            }
+        }
 
-                
-                    if ($comment->getReport() == true) {
-                        if (!in_array($postId, $commentSummary)) {
-                            $numberOfReports = $numberOfReports++;
-                        //var_dump($numberOfReports);
-                        
-                            //$commentSummary[] = array('postId' => $postId);
-                            $commentSummary['postId'.$postId] = $postId;
-                        }
-                    }
-                
-        endforeach;
-        //$commentSummary2 = array_unique ($commentSummary);
-        var_dump($commentSummary);
-        //var_dump($commentSummary2);
-        //var_dump($numberOfComments);
-        */
-        //FIN TESTS
         require('view/backend/homepageView.php');
     }
 

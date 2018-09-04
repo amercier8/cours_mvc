@@ -34,7 +34,7 @@
     <tr>
         <th>Titre du Billet</th>
         <th>Date de rédaction</th>
-        <th>Commentaires en attente de modération</th>
+        <th>À modérer</th>
         <th>Commentaires signalés</th>        
     </tr>
     <?php foreach ($posts as $post):
@@ -42,9 +42,8 @@
     <tr>
         <td><a href="index.php?action=displayPost&amp;id=<?= $post->getId(); ?>"><?= htmlspecialchars($post->getTitle()) ;?></a></td>
         <td><?= $post->getCreation_date(); ?></td>
-        
-        <td><?= $post->getcommentsWaitingForModeration(); ?></td>
-        <td><?= $post->getreportedComments(); ?></td>
+        <td class="moderationPendingNumber"><?= $commentsResume[$post->getId()]['moderationPending']; ?></td>
+        <td class="signaledCommentsNumber"><?= $commentsResume[$post->getId()]['signaled']; ?></td>
     </tr>
     <?php
     endforeach;
