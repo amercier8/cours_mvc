@@ -53,9 +53,9 @@ a
 
 .news
 {
-    border: 2px solid #393939;
-    padding: 5px;
+    padding: 15px;
     margin-bottom: 5px;
+    border-bottom: 1px solid black;
 }
 
 
@@ -147,6 +147,26 @@ h2
     padding: 2%;
     width: 60%;
     justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+.commentRightBOHEader
+{
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+}
+
+.commentRightBOHEader
+{
+    line-height: 0.5em;
+}
+
+.report
+{
+    margin-top: 5px;
 }
 
 .signaledCommentsNumber
@@ -212,13 +232,16 @@ h2
 {
     background-color: white;
     padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .moderationActionsBO
 {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    justify-content: flex-start;
+    flex-direction: row;
+
 }
 
 .moderationActionsBO a
@@ -228,10 +251,8 @@ h2
 
 #BOHeaderComments
 {
-    background-color: #dcdcdc;
-    padding: 2%;
-    width: 60%;
-    margin-top: 5px;
+    font-family: 'robotobold';
+    padding-left: 15px;
 }
 
 #postSuppressionBO a
@@ -254,6 +275,5 @@ h2
 {
     max-height: 250px;
     overflow: hidden;
-    width: 80%;
     background-color: white;
 }

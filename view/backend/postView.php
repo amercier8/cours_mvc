@@ -35,50 +35,51 @@
     //FIN TESTS
     $commentPostId = $comment->getPostId();
     if ($commentPostId === $postId) {
-        ?>
+        ?>  
             <div class="comment">
                 <div class="commentBOHeader">
                     <p>Ecrit par <?= ($comment->getAuthor()); ?>, le <?= $comment->getCommentDate(); ?></p>
-                    <?php
-                    if ($comment->getStatus() === "approved") {
-                        ?>
-                        <p class="approved">Statut : Validé</p>
+                    <div class="commentRightBOHEader">
                         <?php
-                    }
-                    else if ($comment->getStatus() === "disapproved") {
+                        if ($comment->getStatus() === "approved") {
+                            ?>
+                            <p class="approved">Statut : Approuvé</p>
+                            <?php
+                        }
+                        else if ($comment->getStatus() === "disapproved") {
+                            ?>
+                            <p class="disapproved">Statut : Rejeté</p>
+                            <?php
+                        }
+                        else {
+                            ?>
+                            <p class="pending">Statut : En attente de modération</p>
+                            <?php
+                        }
                         ?>
-                        <p class="disapproved">Statut : Non approuvé</p>
                         <?php
-                    }
-                    else {
+                        if ($comment->getReport() == true) {
+                            ?>
+                            <p class="report">
+                                Signalé
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </p>
+                        <?php
+                        }
                         ?>
-                        <p class="pending">Statut : En attente de modération</p>
-                        <?php
-                    }
-                    ?>
+                    </div>
                 </div>
                 <p class="commentContentBO"><?= htmlspecialchars($comment->getComment()); ?></p>
                 <div class="moderationActionsBO">
                     <p>
-                        <a href="index.php?action=approveComment&amp;id=<?= $comment->getId(); ?>">Modérer positivement</a>
-                        <i class="fas fa-thumbs-up"></i>
+                        <a href="index.php?action=approveComment&amp;id=<?= $comment->getId(); ?>">Approuver</a>
                     </p>
+                    <p>&nbsp;|&nbsp;</p>
                     <p>
-                        <a href="index.php?action=disapproveComment&amp;id=<?= $comment->getId(); ?>">Modérer négativement</a>
-                        <i class="fas fa-thumbs-down"></i>
+                        <a href="index.php?action=disapproveComment&amp;id=<?= $comment->getId(); ?>">Rejeter</a>
                     </p>
                 </div>
-                <?php
-                if ($comment->getReport() == true) {
-                    ?>
-                    <p>
-                        Signalé
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </p>
-                </div>
-                <?php
-            }
-            ?>
+
         </div>
         <?php
     }
