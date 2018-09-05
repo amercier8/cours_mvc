@@ -62,6 +62,7 @@ class CommentManager extends Manager
     //Retrieve all comments (To be used by the Dashboard view)
     public function getAllComments() {
         //Si Signalé et pas modéré, en 1er ; ensuite les non signalés en attente de modération ; ensuite le reste par date.
+        //Attention : ne sert à rien car on n'affiche pas tous les commentaires d'un coup mais seulement ceux du post
         $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments
         ORDER BY
             CASE
@@ -85,48 +86,32 @@ class CommentManager extends Manager
         $comment = new Comment($commentContent);
         $sql = 'UPDATE comments SET status=? WHERE id=?';
         $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
+
+        //Second, Select the Post on which the comment is linked to return it
+        $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
+        $result = $this->executeRequest($sqlSelect, array($comment->getId()));
+        $result = $result->fetch();
+        return $result['post_id'];
     }
 
     public function disapproveComment($commentId) {
         $commentContent = ['status' => 'disapproved', 'id' => $commentId];
         $comment = new Comment($commentContent);
         $sql = 'UPDATE comments SET status=? WHERE id=?';
-        //$result = $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
         $this->executeRequest($sql, array($comment->getStatus(), $comment->getId()));
-
-    }
-
-    //TO BE DONE
-    /*
-    public function countReportedComments($postId) {
-        $sql = 'SELECT COUNT(report) FROM comments WHERE post_id=?'; 
-        $result = $this->executeRequest($sql, [$postId]);
-        return $result;
-        var_dump($result);
-    }
-    */
-    
-
-        //This function is functionnal, but not used in this project. It could with a front user management system.
-    //modify a comment & return its post_id
-    /*
-    public function modifyComment($commentId, $commentAuthor, $commentContent)
-    {
-        //Update the comment itself
-        //Sets the report to false, as the content of the comment has been modified and needs to be reviewed again
-        $commentArray = ['id' => $commentId, 'author' => $commentAuthor, 'comment' => $commentContent, 'report' => false];
-        $comment = new Comment($commentArray);
-
-        //First Update the comment
-        $sqlUpdate = 'UPDATE comments SET author=?, comment=?, report=? WHERE id=?';
-        $result = $this->executeRequest($sqlUpdate, array($comment->getAuthor(), $comment->getComment(), $comment->getReport(), $comment->getId()));
-
+        
         //Second, Select the Post on which the comment is linked to return it
         $sqlSelect = 'SELECT post_id FROM comments WHERE id = ?';
         $result = $this->executeRequest($sqlSelect, array($comment->getId()));
         $result = $result->fetch();
-
         return $result['post_id'];
     }
-    */
+
+    public function removeReportComment($commentId) {
+        $commentContent = ['report' => 0, 'id' => $commentId];
+        $comment = new Comment($commentContent);
+        $sql = 'UPDATE comments SET report=? WHERE id=?';
+        $this->executeRequest($sql, array($comment->getReport(), $comment->getId()));
+    }
+
 }

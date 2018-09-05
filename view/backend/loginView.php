@@ -1,9 +1,9 @@
 <?php $title = "Accéder au Back-Office"; ?>
 
 <?php ob_start(); ?>
-<header id="BOHeader">
+<header>
     <h1>Accéder au Back-Office</h1>
-    <div id="BOHeaderLinks">
+    <div id="HeaderLinks">
         <p><a href="index.php">Accéder au Blog</a></p>
     </div>
 </header>

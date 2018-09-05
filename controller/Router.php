@@ -69,7 +69,6 @@ class Router {
                 else if ($_GET['action'] == 'displayDashboard') {
                     //var_dump('toto');
                     $this->ctrlBackend->listPosts();
-                    //$this->ctrlBackend->countReportedComments()
                 }
 
                 else if ($_GET['action'] == 'delete') {
@@ -100,13 +99,21 @@ class Router {
 
                 elseif ($_GET['action'] == 'approveComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $this->ctrlBackend->approveComment($_GET['id']);
+                        $this->ctrlBackend->removeReportComment($_GET['id']);
+                        $this->ctrlBackend->approveComment($_GET['id']);
+
+                        //$postId = $result->fetch();
+                        //header('Location: index.php?action=post&id=' .$postId);
                     }
                 }
 
                 elseif ($_GET['action'] == 'disapproveComment') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $this->ctrlBackend->disapproveComment($_GET['id']);
+                        $this->ctrlBackend->removeReportComment($_GET['id']);
+                        $this->ctrlBackend->disapproveComment($_GET['id']);
+
+                        //$postId = $result->fetch();
+                        //header('Location: index.php?action=post&id=' .$postId);
                     }
                 }
 

@@ -55,7 +55,8 @@ class ctrlBackend {
     public function listPosts() {
         $posts = $this->postManager->getPosts();
         $comments = $this->commentManager->getAllComments();
-        //TESTS
+
+        //
         $commentsResume=[];
         foreach($comments as $comment) {
             if($comment->getReport() == true) {
@@ -75,7 +76,6 @@ class ctrlBackend {
 
     public function displayPost($postId) {
         //TEST recup des coms signalés et en attente de com
-        //$this->postManager->getReportedComments
         $post = $this->postManager->getPost($postId);
         //TEST
         $comments = $this->commentManager->getAllComments();
@@ -99,21 +99,20 @@ class ctrlBackend {
     }
 
     public function approveComment($commentId) {
-        $this->commentManager->approveComment($commentId);
-        header('Location: index.php?action=displayDashboard');
+        //$this->commentManager->approveComment($commentId);
+
+        $postId = $this->commentManager->approveComment($commentId);
+        header('Location: index.php?action=displayPost&id=' .$postId);
     }
 
     public function disapproveComment($commentId) {
-        $this->commentManager->disapproveComment($commentId);
-        header('Location: index.php?action=displayDashboard');
+        //$this->commentManager->disapproveComment($commentId);
+
+        $postId = $this->commentManager->disapproveComment($commentId);
+        header('Location: index.php?action=displayPost&id=' .$postId);
     }
 
-    //TO BE DONE
-    /*
-    public function countReportedComments($postId) {
-        $reportedComments = $this->CommentManager->countReportedComments($postId);
-        return $reportedComments;
-        header('Location: index.php?action=displayDashboard');
+    public function removeReportComment($commentId) {
+        $this->commentManager->removeReportComment($commentId);
     }
-    */
 }

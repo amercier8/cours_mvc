@@ -38,49 +38,26 @@ body
     margin-right: 5%;
 }
 
-h1, h3
-{
-    text-align:center;
-}
-h3
-{
-    background-color:black;
-    color:white;
-    font-size:0.9em;
-    margin-bottom:0px;
-}
-
-/*
-.news p
-{
-    background-color:#CCCCCC;
-    margin-top:0px;
-}
-.news
-{
-    width:70%;
-    margin:auto;
-}
-*/
 a
 {
     text-decoration: none;
     font-style: italic;
     color: #393939;
+    border-bottom: 1px solid #000;
 }
 
-html body div h3
+.news>h3
 {
-    width: 50%;
+    padding-left: 10px;
 }
 
-.chapterFront
+.news
 {
-    max-height: 250px;
-    overflow: hidden;
-    width: 80%;
-    background-color: #dcdcdc;
+    border: 2px solid #393939;
+    padding: 5px;
+    margin-bottom: 5px;
 }
+
 
 /*FONTAWESOME */
 .fa-thumbs-up, .approved
@@ -104,7 +81,7 @@ h1 a
 {
     font-style: normal;
 }
-#BOHeader
+header
 {
     display: flex;
     justify-content: space-between;
@@ -112,25 +89,15 @@ h1 a
     margin-right: 10%;
 }
 
-#BOHeaderLinks p
+#HeaderLinks p
 {
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
     margin-top: 10px;
-    border-bottom: 1px solid #000;
     text-decoration: none;
     line-height: 1.5;
     padding-bottom: 1px;
-}
-
-h1, h2, h3, h4
-{
-    margin-top: 3em;
-    float: left;
-    margin: 1em 0 0.25em;
-    margin-top: 1em;
-    font-weight: 700;
 }
 
 h1
@@ -281,3 +248,12 @@ h2
 
 /*Home Front */
 
+
+
+.chapterFront
+{
+    max-height: 250px;
+    overflow: hidden;
+    width: 80%;
+    background-color: white;
+}

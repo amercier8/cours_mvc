@@ -1,9 +1,9 @@
 <?php $title = "Modifier l'article"; ?>
 
 <?php ob_start(); ?>
-<header id="BOHeader">
+<header>
 <h1><a href="index.php?action=displayDashboard">BackOffice</a></h1>
-    <div id="BOHeaderLinks">
+    <div id="HeaderLinks">
         <p><a href="index.php">Accéder au Blog</a></p>
         <p><a href="index.php?action=disconnect">Se déconnecter</a></p>
     </div>
