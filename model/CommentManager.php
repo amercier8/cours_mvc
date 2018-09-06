@@ -9,7 +9,7 @@ class CommentManager extends Manager
     {
         //OOP VERSION OF THE METHOD
         //$sql contains the sql request
-        $sql = 'SELECT id, author, comment, report, status, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
+        $sql = 'SELECT id, author, comment, report, status, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
         //Usage of the execute request method, contained in the Manager
         $results = $this->executeRequest($sql, array($postId));
         //Creation of an empty array which is filled with the db data

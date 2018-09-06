@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <header>
-    <h1><a href="index.php?action=displayDashboard">BackOffice</a></h1>
+    <h1><a href="index.php?action=displayDashboard">BackOffice - Billet simple pour l'Alaska</a></h1>
     <div id="HeaderLinks">
         <p><a href="index.php">Accéder au Blog</a></p>
         <p><a href="index.php?action=disconnect">Se déconnecter</a></p>
@@ -22,7 +22,7 @@
             <textarea class="mytextarea" name="content"></textarea>
         </div>
         <div>
-            <input type="submit" />
+            <input id="homeBOSubmit" type="submit" />
         </div>
     </form>
 </div>

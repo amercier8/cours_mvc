@@ -1,24 +1,22 @@
-<?php $title = 'Mon blog'; ?>
+<!-- <?php $title = 'Billet simple pour l\'Alaska'; ?> -->
 
 <?php ob_start(); ?>
 <header>
-    <h1>Billet simple pour l'Alaska</h1>
+    <h1><a href="index.php">Billet simple pour l'Alaska, par Jean Forteroche</a></h1>
     <div id="HeaderLinks">
-        <p ><a href="index.php?displayLogin">Accéder au BackOffice</a></p>
+        <a href="index.php?displayLogin">Accéder au BackOffice</a>
     </div>
 </header>
 
 <?php foreach ($posts as $post): ?>
 <div class="news">
-    <h3>
+    <h2>
         "<?= htmlspecialchars($post->getTitle()) ;?>"
-        <em>rédigé le <?= $post->getCreation_date(); ?></em>
-    </h3>
+        <em>, publié le <?= $post->getCreation_date(); ?></em>
+    </h2>
     
-    <div class="chapterFront">
-        <p>
-            <?= $post->getContent(); ?>
-        </p>
+    <div class="chapterFrontHome">
+        <?= $post->getContent(); ?>
     </div>
     <a href="index.php?action=post&amp;id=<?= $post->getId(); ?>">Lire la suite</a>
 </div>
