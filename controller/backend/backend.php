@@ -20,29 +20,24 @@ class ctrlBackend {
     public function displayLoginPage() {
         //If Session OK, then directly rediredect to the Backend view
         if($_SESSION['loggedIn'] === true) {
-            //var_dump($_SESSION['loggedIn']);
             header('Location: index.php?action=displayDashboard');
         }
         else {
-            require('view/backend/loginView.php');
+            header('Location: index.php?action=displayLogin');
         }
     }
 
     public function verifyPassword($userPassword) {
         if($_SESSION['loggedIn'] === true) {
-            //var_dump($_SESSION['loggedIn']);
-            //A passer en header location via indexphp - rajouter une action = dashboard ; pour repasser par le routeur
-            //require('view/backend/homepageView.php');
             header('Location: index.php?action=displayDashboard');
         }
         else {
             $passwordVerified = $this->passwordManager->verifyPassword($userPassword);
             if($_SESSION['loggedIn'] === true) {
-                //var_dump($_SESSION['loggedIn']);
                 header('Location: index.php?action=displayDashboard');
             }
             else {
-                throw new Exception('Impossible d\'accéder au BackOffice');
+                throw new Exception('Impossible d\'accéder au BackOffice, veuillez réessayer');
             }
         }
     }
@@ -56,7 +51,6 @@ class ctrlBackend {
         $posts = $this->postManager->getPosts();
         $comments = $this->commentManager->getAllComments();
 
-        //
         $commentsResume=[];
         foreach($comments as $comment) {
             if($comment->getReport() == true) {
@@ -75,9 +69,8 @@ class ctrlBackend {
     }
 
     public function displayPost($postId) {
-        //TEST recup des coms signalés et en attente de com
         $post = $this->postManager->getPost($postId);
-        //TEST
+
         $comments = $this->commentManager->getAllComments();
         require('view/backend/postView.php');
     }
@@ -99,14 +92,12 @@ class ctrlBackend {
     }
 
     public function approveComment($commentId) {
-        //$this->commentManager->approveComment($commentId);
 
         $postId = $this->commentManager->approveComment($commentId);
         header('Location: index.php?action=displayPost&id=' .$postId);
     }
 
     public function disapproveComment($commentId) {
-        //$this->commentManager->disapproveComment($commentId);
 
         $postId = $this->commentManager->disapproveComment($commentId);
         header('Location: index.php?action=displayPost&id=' .$postId);

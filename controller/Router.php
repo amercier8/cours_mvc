@@ -3,9 +3,6 @@
 require_once 'controller/frontend/frontend.php';
 require_once 'controller/backend/backend.php';
 require_once 'view/frontend/VueFrontend.php';
-//require_once 'view/frontend/commentView.php';
-//require_once 'view/frontend/listPostsView.php';
-//require_once 'view/frontend/postView.php';
 
 class Router {
 
@@ -61,13 +58,11 @@ class Router {
                     }
                 }
 
-                //This is not working properly?
                 else if($_GET['action'] == 'disconnect') {
                     $this->ctrlBackend->disconnect();
                 }
 
                 else if ($_GET['action'] == 'displayDashboard') {
-                    //var_dump('toto');
                     $this->ctrlBackend->listPosts();
                 }
 
@@ -75,7 +70,6 @@ class Router {
                     if (isset($_GET['id']) && $_GET['id'] > 0 && $_SESSION['loggedIn'] == true) {
                         $this->ctrlBackend->deletePost($_GET['id']);
                     }
-                    //var_dump('toto');
                     $this->ctrlBackend->listPosts();
                 }
 
@@ -101,9 +95,6 @@ class Router {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlBackend->removeReportComment($_GET['id']);
                         $this->ctrlBackend->approveComment($_GET['id']);
-
-                        //$postId = $result->fetch();
-                        //header('Location: index.php?action=post&id=' .$postId);
                     }
                 }
 
@@ -111,42 +102,16 @@ class Router {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlBackend->removeReportComment($_GET['id']);
                         $this->ctrlBackend->disapproveComment($_GET['id']);
-
-                        //$postId = $result->fetch();
-                        //header('Location: index.php?action=post&id=' .$postId);
                     }
                 }
-
-                //This below is functionnal but not used in this project. It would need a front-end user management system.
-                /*             
-                elseif ($_GET['action'] == 'modifyComment') {
-                    if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        //TODO : Je ne vérifie que si elles ne sont pas vides
-                        if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                            $this->ctrlFrontend->modifyComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                        }
-                        else {
-                            header('Location: index.php?action=displayComment&id=' .$_GET['id']);
-                        }
-                    }
-                } 
-                */
             }
 
             else if(isset($_GET['displayLogin'])) {
-                //if ($_SESSION['loggedIn'] == false) {
                     $this->ctrlBackend->displayLoginPage();
-                //}
-                //else {
-                    //$this->ctrlBackend->listPosts();
-                //}
-                //$this->ctrlBackend->displayLoginPage();
             }
 
             else if(isset($_GET['login'])) {
                 $this->ctrlBackend->verifyPassword($_POST['psw']);
-                //if ($_GET['action'] == 'displayDashboard')
-                //$this->ctrlBackend->listPosts();
             }
                 
             else {

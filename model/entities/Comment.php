@@ -20,17 +20,13 @@ class Comment {
         }
     }
 
-    //constructor to add
     public function __construct(array $data) {
         $this->hydrate($data);
     }
 
     //Setters
-    //
-    //Manque les contrôles sur les données
-    //
     public function setId($id) {
-        $this->id = $id;
+            $this->id = $id;
     }
 
     public function setPostId($postId) {
@@ -38,11 +34,11 @@ class Comment {
     }
 
     public function setAuthor($author) {
-        $this->author = $author;
+        $this->author = htmlspecialchars($author);
     }
 
     public function setComment($comment) {
-        $this->comment = $comment;
+        $this->comment = htmlspecialchars($comment);
     }
 
     public function setCommentDate($commentDate) {
@@ -57,7 +53,6 @@ class Comment {
     }
 
     public function setReport($report) {
-        //if (is_bool) doesn't seem to work...
             $this->report = $report;
         }
 

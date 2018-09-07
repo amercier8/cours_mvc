@@ -31,8 +31,6 @@
     <h2>Commentaires</h2>
 </div>
 <?php foreach ($comments as $comment):
-    //TESTS
-    //FIN TESTS
     $commentPostId = $comment->getPostId();
     if ($commentPostId === $postId) {
         ?>  

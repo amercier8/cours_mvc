@@ -5,7 +5,6 @@ class Vue {
     private $file;
     private $title;
 
-    //Is "action" really appropriate here? 
     public function __construct($action) {
         $this->fichier = $action. "View.php";
     }

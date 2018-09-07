@@ -15,19 +15,17 @@ class Post {
         }
     }
 
-    //Constructor
     public function __construct(array $data) {
         $this->hydrate($data);
     }
 
     //Setters
-    //Data controls missing, TO DO
     public function setId($id) {
         $this->id = $id;
     }
 
     public function setTitle($title) {
-        $this->title = $title;
+        $this->title = htmlspecialchars($title);
     }
 
     public function setContent($content) {

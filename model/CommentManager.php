@@ -7,7 +7,6 @@ class CommentManager extends Manager
 {
     public function getComments($postId)
     {
-        //OOP VERSION OF THE METHOD
         //$sql contains the sql request
         $sql = 'SELECT id, author, comment, report, status, post_id AS postId, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments WHERE post_id = ? ORDER BY comment_date DESC';
         //Usage of the execute request method, contained in the Manager
@@ -61,8 +60,7 @@ class CommentManager extends Manager
 
     //Retrieve all comments (To be used by the Dashboard view)
     public function getAllComments() {
-        //Si Signalé et pas modéré, en 1er ; ensuite les non signalés en attente de modération ; ensuite le reste par date.
-        //Attention : ne sert à rien car on n'affiche pas tous les commentaires d'un coup mais seulement ceux du post
+        //Sorting here is not used as we don't display all comments in one place. But it could be useful later
         $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments
         ORDER BY
             CASE
