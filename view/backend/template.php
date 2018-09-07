@@ -12,5 +12,6 @@
         <?= $content ?>
 
         <script src="public/js/tinyMce.js"></script>
+        <script src="public/js/Session.js"></script>
     </body>
 </html>
