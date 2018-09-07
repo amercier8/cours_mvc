@@ -49,8 +49,15 @@ class Router {
                     }
                 }
 
+                //Fonction pour protéger les actions réservées à l'admin
+                // elseif ($_GET['action'] == 'addpost'
+                //         OR $_GET['action'] == 'displayDashboard'
+                //         OR $_GET['action'] == 'delete'
+                //         OR $_GET['action'] == 'displayPost')
+
+
                 elseif ($_GET['action'] == 'addPost') {
-                    if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                    if (!empty($_POST['title']) && !empty($_POST['content']) && $_SESSION['loggedIn'] == true) {
                         $this->ctrlBackend->addPost($_POST['title'], $_POST['content']);
                     }
                     else {
@@ -62,7 +69,7 @@ class Router {
                     $this->ctrlBackend->disconnect();
                 }
 
-                else if ($_GET['action'] == 'displayDashboard') {
+                else if ($_GET['action'] == 'displayDashboard' && $_SESSION['loggedIn'] == true) {
                     $this->ctrlBackend->listPosts();
                 }
 
@@ -74,7 +81,7 @@ class Router {
                 }
 
                 elseif ($_GET['action'] == 'displayPost') {
-                    if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    if (isset($_GET['id']) && $_GET['id'] > 0 && $_SESSION['loggedIn'] == true) {
                         $this->ctrlBackend->displayPost($_GET['id']);
                     }
                 }
@@ -82,7 +89,7 @@ class Router {
                 elseif ($_GET['action'] == 'modifyPost') {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         //TODO : Je ne vérifie que si elles ne sont pas vides
-                        if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                        if (!empty($_POST['title']) && !empty($_POST['content']) && $_SESSION['loggedIn'] == true) {
                             $this->ctrlBackend->modifyPost($_GET['id'], $_POST['title'], $_POST['content']);
                         }
                         else {
@@ -91,14 +98,14 @@ class Router {
                     }
                 }
 
-                elseif ($_GET['action'] == 'approveComment') {
+                elseif ($_GET['action'] == 'approveComment' && $_SESSION['loggedIn'] == true) {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlBackend->removeReportComment($_GET['id']);
                         $this->ctrlBackend->approveComment($_GET['id']);
                     }
                 }
 
-                elseif ($_GET['action'] == 'disapproveComment') {
+                elseif ($_GET['action'] == 'disapproveComment' && $_SESSION['loggedIn'] == true) {
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         $this->ctrlBackend->removeReportComment($_GET['id']);
                         $this->ctrlBackend->disapproveComment($_GET['id']);
