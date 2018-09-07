@@ -19,11 +19,14 @@ class ctrlBackend {
     //WIP
     public function displayLoginPage() {
         //If Session OK, then directly rediredect to the Backend view
+        
         if($_SESSION['loggedIn'] === true) {
             header('Location: index.php?action=displayDashboard');
+
         }
         else {
-            header('Location: index.php?action=displayLogin');
+            require('view/backend/loginView.php');
+
         }
     }
 

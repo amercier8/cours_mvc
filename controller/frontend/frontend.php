@@ -22,28 +22,28 @@ class ctrlFrontend {
     }
 
     public function post() {
-    $post = $this->postManager->getPost($_GET['id']);
-    $comments = $this->commentManager->getComments($_GET['id']);
+        $post = $this->postManager->getPost($_GET['id']);
+        $comments = $this->commentManager->getComments($_GET['id']);
 
-    require('view/frontend/postView.php');
+        require('view/frontend/postView.php');
     }
 
     public function addComment($postId, $author, $comment) {
-    $affectedLines = $this->commentManager->postComment($postId, $author, $comment);
+        $affectedLines = $this->commentManager->postComment($postId, $author, $comment);
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le commentaire !');
+        }
+        else {
+            header('Location: index.php?action=post&id=' . $postId);
+        }
     }
-    else {
-        header('Location: index.php?action=post&id=' . $postId);
-    }
-}
 
     public function displayComment($commentId) {
-    $comment = $this->commentManager->getComment($commentId);
-    //with this function, we redirect to commentView.php and transmit the commentId
-    require('view/frontend/commentView.php');
-}
+        $comment = $this->commentManager->getComment($commentId);
+        //with this function, we redirect to commentView.php and transmit the commentId
+        require('view/frontend/commentView.php');
+    }
 
     public function reportComment($comment) {
         $postId = $this->commentManager->reportComment($comment);
