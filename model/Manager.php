@@ -2,15 +2,6 @@
 
 class Manager
 {
-
-    private $bdd;
-    
-    protected function dbConnect()
-    {
-        $db = new \PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
-        return $db;
-    }
-
     protected function executeRequest($sql, $params = null) {
         if ($params == null) {
             $result = $this->getBdd()->query($sql);    // Direct execution
@@ -25,9 +16,14 @@ class Manager
     
     private function getBdd() {
         if ($this->bdd == null) {
-        //Connexion creation
-            $this->bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8',
-            'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+            $host_name = 'localhost';
+            $database = 'blog';
+            $user_name = 'root';
+            $password = 'root';
+
+            $this->bdd = new PDO("mysql:host=$host_name;dbname=$database;charset=utf8",
+            $user_name, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
     return $this->bdd;
     }

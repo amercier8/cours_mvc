@@ -49,13 +49,6 @@ class Router {
                     }
                 }
 
-                //Fonction pour protéger les actions réservées à l'admin
-                // elseif ($_GET['action'] == 'addpost'
-                //         OR $_GET['action'] == 'displayDashboard'
-                //         OR $_GET['action'] == 'delete'
-                //         OR $_GET['action'] == 'displayPost')
-
-
                 elseif ($_GET['action'] == 'addPost') {
                     if (!empty($_POST['title']) && !empty($_POST['content']) && $_SESSION['loggedIn'] == true) {
                         $this->ctrlBackend->addPost($_POST['title'], $_POST['content']);

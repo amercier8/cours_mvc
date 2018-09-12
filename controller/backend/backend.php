@@ -35,7 +35,7 @@ class ctrlBackend {
             header('Location: index.php?action=displayDashboard');
         }
         else {
-            $passwordVerified = $this->passwordManager->verifyPassword($userPassword);
+            $this->passwordManager->verifyPassword($userPassword);
             if($_SESSION['loggedIn'] === true) {
                 header('Location: index.php?action=displayDashboard');
             }
