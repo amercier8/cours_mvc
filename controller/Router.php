@@ -2,7 +2,6 @@
 
 require_once 'controller/frontend/frontend.php';
 require_once 'controller/backend/backend.php';
-require_once 'view/frontend/VueFrontend.php';
 
 class Router {
 
