@@ -54,6 +54,7 @@ class ctrlBackend {
         $posts = $this->postManager->getPosts();
         $comments = $this->commentManager->getAllComments();
 
+        //We need this $commentsResume, to be then used by the the backend homePageView, to construct the table which shows the state of the different comments on it.
         $commentsResume=[];
         foreach($comments as $comment) {
             if($comment->getReport() == true) {

@@ -60,7 +60,6 @@ class CommentManager extends Manager
 
     //Retrieve all comments (To be used by the Dashboard view)
     public function getAllComments() {
-        //Sorting here is not used as we don't display all comments in one place. But it could be useful later
         $sql = 'SELECT id, post_id AS postId, author, comment, status, report, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments
         ORDER BY
             CASE

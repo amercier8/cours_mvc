@@ -17,7 +17,7 @@ class PasswordManager extends Manager
     public function verifyPassword($userPassword) {
 
         $hashedDbPassword = $this->getHashedDbPassword();
-
+        //$hashedDbPassword is an array, we use the first and only result, which explains the $hashedDbPassword[0]
         if ((password_verify($userPassword,$hashedDbPassword[0]))) {
             $_SESSION['loggedIn'] = true;
         }
